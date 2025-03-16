@@ -154,6 +154,14 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
           <span className="inline-block w-0.5 h-5 bg-foreground ml-0.5 animate-caret-blink"></span>
         </div>
         
+        <div className="mt-4 p-4 bg-gray-50 rounded-md">
+          <p className="text-sm text-muted-foreground mb-1">Current typing:</p>
+          <div className="text-xl font-preeti text-foreground">
+            {userInput}
+            <span className="inline-block w-0.5 h-5 bg-primary ml-0.5 animate-caret-blink"></span>
+          </div>
+        </div>
+        
         <input
           ref={inputRef}
           type="text"
