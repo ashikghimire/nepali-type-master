@@ -13,7 +13,6 @@ const preetiToUnicodeMap: Record<string, string> = {
   'xf]': 'हो',
   '\\.': '।',
   'lxdf': 'हिमा',
-  'n': 'ल',
   'kxf': 'पहा',
   '8': 'ड',
   't/f': 'तरा',
@@ -67,8 +66,8 @@ const preetiToUnicodeMap: Record<string, string> = {
   ';a}': 'सबै',
   'dfof': 'माया',
   'u5{': 'गर्छ',
-  'g\\\\': 'न्',
-  'k9\\\\g': 'पढ्न',
+  'g\\': 'न्',
+  'k9\\g': 'पढ्न',
   '1fg': 'ज्ञान',
   ';|f]t': 'स्रोत',
   'zlQm': 'शक्ति',
@@ -88,11 +87,10 @@ const preetiToUnicodeMap: Record<string, string> = {
   'ltxf/': 'तिहार',
   '57': 'छठ',
   'cGo': 'अन्य',
-  'v';': 'खुस',
+  'v\'z': 'खुस', // Fixed: 'v';' to 'v\'z'
   'Ln]': 'ीले',
   'dgf': 'मना',
   'OG5': 'इन्छ',
-  'g\\\\': 'न्',
   // Add more mappings as needed
 };
 
