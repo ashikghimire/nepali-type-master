@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { getRandomText } from '@/utils/textSamples';
 import { calculateWPM, calculateAccuracy, processUserInput, formatTime } from '@/utils/typingUtils';
+import { preetiToUnicode } from '@/utils/preetiToUnicode';
 import { cn } from '@/lib/utils';
 import Stats from './Stats';
 
@@ -133,6 +133,9 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     });
   };
   
+  // Convert current targetText to Unicode for display
+  const unicodeTargetText = preetiToUnicode(targetText);
+  
   return (
     <div className={cn("w-full max-w-screen-lg mx-auto px-4", className)}>
       <div className="mb-8">
@@ -149,9 +152,14 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="text-2xl leading-relaxed font-preeti mb-12 tracking-wide">
+        <div className="text-2xl leading-relaxed font-preeti mb-4 tracking-wide">
           {renderText()}
           <span className="inline-block w-0.5 h-5 bg-foreground ml-0.5 animate-caret-blink"></span>
+        </div>
+        
+        <div className="text-sm text-muted-foreground mb-6 border-t pt-3">
+          <p className="mb-1">नेपाली युनिकोड:</p>
+          <p className="text-xl text-foreground font-sans">{unicodeTargetText}</p>
         </div>
         
         <div className="mt-4 p-4 bg-gray-50 rounded-md">
@@ -159,6 +167,13 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
           <div className="text-xl font-preeti text-foreground">
             {userInput}
             <span className="inline-block w-0.5 h-5 bg-primary ml-0.5 animate-caret-blink"></span>
+          </div>
+          
+          <div className="mt-2 border-t pt-2">
+            <p className="text-sm text-muted-foreground mb-1">नेपाली युनिकोड:</p>
+            <div className="text-xl text-foreground font-sans">
+              {preetiToUnicode(userInput)}
+            </div>
           </div>
         </div>
         
