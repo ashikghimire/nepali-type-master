@@ -18,6 +18,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
   const [userInput, setUserInput] = useState<string>('');
   const [isTestActive, setIsTestActive] = useState<boolean>(false);
   const [isTestComplete, setIsTestComplete] = useState<boolean>(false);
+  const [showFinalScore, setShowFinalScore] = useState<boolean>(false);
   
   // Timer state
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
@@ -44,6 +45,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     setUserInput('');
     setIsTestActive(false);
     setIsTestComplete(false);
+    setShowFinalScore(false);
     setTimeElapsed(0);
     setWpm(0);
     setAccuracy(100);
@@ -97,14 +99,24 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     
     // Check if test is complete
     if (value.length >= targetText.length) {
-      endTest();
+      completeCurrentText();
     }
   };
   
-  // End the current test
+  // Complete current text and automatically proceed to next one
+  const completeCurrentText = () => {
+    // Small delay before showing the next text
+    setTimeout(() => {
+      setUserInput('');
+      setCurrentText(getRandomText());
+    }, 500);
+  };
+  
+  // End the current test and show final score
   const endTest = () => {
     setIsTestActive(false);
     setIsTestComplete(true);
+    setShowFinalScore(true);
     
     // Stop the timer
     if (timerIntervalRef.current) {
@@ -127,6 +139,12 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
   
   // Get the current target text based on display format
   const targetText = displayFormat === 'unicode' ? currentText.unicode : currentText.preeti;
+  const translationText = displayFormat === 'unicode' ? currentText.preeti : currentText.unicode;
+  
+  // Calculate how much of the translation to highlight based on user input progress
+  const highlightedChars = Math.min(userInput.length, targetText.length);
+  const highlightRatio = targetText.length > 0 ? highlightedChars / targetText.length : 0;
+  const highlightedTranslationChars = Math.floor(translationText.length * highlightRatio);
   
   // Render characters with correct/incorrect highlighting
   const renderText = () => {
@@ -151,6 +169,22 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     });
   };
   
+  // Render translation with progressive highlighting
+  const renderTranslation = () => {
+    return translationText.split('').map((char, index) => {
+      const isHighlighted = index < highlightedTranslationChars;
+      const className = isHighlighted 
+        ? 'text-primary' 
+        : 'text-gray-400';
+        
+      return (
+        <span key={index} className={className}>
+          {char}
+        </span>
+      );
+    });
+  };
+  
   return (
     <div className={cn("w-full max-w-screen-lg mx-auto px-4 typing-test-container", className)}>
       <div className="mb-8">
@@ -161,70 +195,107 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
         />
       </div>
       
-      <motion.div 
-        className="relative text-center bg-gray-900 dark:bg-gray-900 bg-opacity-90 dark:bg-opacity-90 backdrop-blur-sm rounded-lg p-8 shadow-lg mb-8 typing-card"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="flex justify-between items-center mb-4">
-          <span className="text-gray-400 dark:text-gray-400 text-sm">
-            Nepali Typing Practice
-          </span>
-          <button 
-            onClick={toggleDisplayFormat}
-            className="px-3 py-1 rounded-full bg-gray-700 hover:bg-gray-600 text-gray-300 text-xs transition-colors"
-          >
-            {displayFormat === 'unicode' ? 'Use Preeti' : 'Use Unicode'}
-          </button>
-        </div>
-        
-        <div className={cn(
-          "text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px]",
-          "font-preeti"
-        )}>
-          {renderText()}
-          <span className="inline-block w-0.5 h-5 bg-primary ml-0.5 animate-caret-blink"></span>
-        </div>
-        
-        <div className="mb-4">
-          <h3 className="text-gray-300 mb-2 text-left">Translation:</h3>
-          <div className="text-gray-400 text-left">
-            {displayFormat === 'unicode' ? (
-              <span className="font-preeti">{currentText.preeti}</span>
-            ) : (
-              <span>{currentText.unicode}</span>
-            )}
+      {showFinalScore ? (
+        <motion.div
+          className="bg-gray-800 p-8 rounded-lg shadow-lg text-center"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <h2 className="text-2xl font-bold mb-4 text-primary">Your Final Score</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div className="bg-gray-700 p-4 rounded-lg">
+              <div className="text-3xl font-bold text-primary">{wpm}</div>
+              <div className="text-sm text-gray-400">Words Per Minute</div>
+            </div>
+            <div className="bg-gray-700 p-4 rounded-lg">
+              <div className="text-3xl font-bold text-primary">{accuracy}%</div>
+              <div className="text-sm text-gray-400">Accuracy</div>
+            </div>
+            <div className="bg-gray-700 p-4 rounded-lg">
+              <div className="text-3xl font-bold text-primary">{formatTime(timeElapsed)}</div>
+              <div className="text-sm text-gray-400">Time Elapsed</div>
+            </div>
           </div>
-        </div>
-        
-        <div className="text-center text-xs text-gray-500 dark:text-gray-500 mb-2">
-          <span className="text-gray-400 dark:text-gray-400">{userInput.length}</span>
-          <span> / </span>
-          <span>{targetText.length}</span>
-        </div>
-        
-        <input
-          ref={inputRef}
-          type="text"
-          value={userInput}
-          onChange={handleInput}
-          className="opacity-0 absolute inset-0 w-full h-full cursor-default"
-          autoFocus
-          autoComplete="off"
-          autoCorrect="off"
-          autoCapitalize="off"
-          spellCheck="false"
-        />
-      </motion.div>
+          <button
+            onClick={startNewTest}
+            className="px-6 py-2 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition-opacity duration-200"
+          >
+            Try Again
+          </button>
+        </motion.div>
+      ) : (
+        <motion.div 
+          className="relative text-center bg-gray-900 dark:bg-gray-900 bg-opacity-90 dark:bg-opacity-90 backdrop-blur-sm rounded-lg p-8 shadow-lg mb-8 typing-card"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="flex justify-between items-center mb-4">
+            <span className="text-gray-400 dark:text-gray-400 text-sm">
+              Nepali Typing Practice
+            </span>
+            <button 
+              onClick={toggleDisplayFormat}
+              className="px-3 py-1 rounded-full bg-gray-700 hover:bg-gray-600 text-gray-300 text-xs transition-colors"
+            >
+              {displayFormat === 'unicode' ? 'Use Preeti' : 'Use Unicode'}
+            </button>
+          </div>
+          
+          <div className={cn(
+            "text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px]",
+            "font-preeti"
+          )}>
+            {renderText()}
+            <span className="inline-block w-0.5 h-5 bg-primary ml-0.5 animate-caret-blink"></span>
+          </div>
+          
+          <div className="mb-4">
+            <h3 className="text-gray-300 mb-2 text-left">Translation:</h3>
+            <div className={cn("text-gray-400 text-left", displayFormat === 'preeti' ? '' : 'font-preeti')}>
+              {renderTranslation()}
+            </div>
+          </div>
+          
+          <div className="text-center text-xs text-gray-500 dark:text-gray-500 mb-2">
+            <span className="text-gray-400 dark:text-gray-400">{userInput.length}</span>
+            <span> / </span>
+            <span>{targetText.length}</span>
+          </div>
+          
+          <input
+            ref={inputRef}
+            type="text"
+            value={userInput}
+            onChange={handleInput}
+            className="opacity-0 absolute inset-0 w-full h-full cursor-default"
+            autoFocus
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
+          />
+        </motion.div>
+      )}
       
       <div className="flex justify-center gap-4">
-        <button
-          onClick={startNewTest}
-          className="px-6 py-2 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition-opacity duration-200"
-        >
-          {isTestComplete ? 'Try Again' : 'New Text'}
-        </button>
+        {isTestActive && !showFinalScore && (
+          <button
+            onClick={endTest}
+            className="px-6 py-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors duration-200"
+          >
+            Stop & View Score
+          </button>
+        )}
+        {!isTestActive && !showFinalScore && (
+          <button
+            onClick={startNewTest}
+            className="px-6 py-2 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition-opacity duration-200"
+          >
+            New Text
+          </button>
+        )}
       </div>
     </div>
   );
