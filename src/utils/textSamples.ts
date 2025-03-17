@@ -67,26 +67,6 @@ export const textSamples: TextEntry[] = [
   {
     unicode: "नेपाल एउटा सुन्दर देश हो।",
     preeti: "g]kfn Pp6f ;'Gb/ b]z xf]।"
-  },
-  {
-    unicode: "म क्रिकेट खेल्न जान्छु।",
-    preeti: "d lqms]6 v]n\g hfG5'।"
-  },
-  {
-    unicode: "हिजो राति धेरै पानी पर्‍यो।",
-    preeti: "lxhf] /flt w]/} kfgL k‍{of]।"
-  },
-  {
-    unicode: "मलाई पढ्न मन पर्छ।",
-    preeti: "dnfO{ k9\g dg k5{।"
-  },
-  {
-    unicode: "तिमी किन रिसाएको?",
-    preeti: "ltdL lsg l/;fPsf]?"
-  },
-  {
-    unicode: "हामी सिनेमामा जाने योजना बनाउँदै छौं।",
-    preeti: "xfdL l;g]dfdf hfg] of]hgf agfpFb} 5f}+।"
   }
 ];
 

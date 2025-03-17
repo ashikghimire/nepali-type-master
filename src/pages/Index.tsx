@@ -18,13 +18,13 @@ const Index = () => {
           transition={{ duration: 0.5 }}
         >
           <h1 className="text-2xl md:text-3xl font-medium tracking-tight mb-2 text-gray-200 dark:text-gray-200">
-            नेपाली टाइपिङ प्रशिक्षण
+            नेपाली टाइपिङ टेस्ट
           </h1>
           <p className="text-gray-400 dark:text-gray-400 text-sm max-w-2xl mx-auto">
-            Master Preeti and Unicode typing with highlighting and instant feedback
+            Improve your Nepali typing speed and accuracy with this typing test
           </p>
           <div className="mt-4 text-gray-400 text-sm">
-            <p>Type complete sentences, see your progress highlighted, and track your WPM and accuracy</p>
+            <p>Practice typing in both Unicode (नेपाली) and Preeti (g]kfnL) formats</p>
           </div>
         </motion.div>
         
