@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-white to-gray-50">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-secondary/20 transition-colors duration-300">
       <Header />
       
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-12">

@@ -61,7 +61,7 @@ const preetiToUnicodeMap: Record<string, string> = {
   'f}': 'ौ',
   '\\': '्',
   '+': 'ं',
-  '%': 'ँ',
+  // Removed duplicate % character
   'M': 'ः',
   
   // Common combinations
@@ -122,8 +122,8 @@ const preetiToUnicodeMap: Record<string, string> = {
   ';a}': 'सबै',
   'dfof': 'माया',
   'u5{': 'गर्छ',
-  'g\\': 'न्',
-  'k9\\g': 'पढ्न',
+  'g\\\\': 'न्',
+  'k9\\\\g': 'पढ्न',
   '1fg': 'ज्ञान',
   ';|f]t': 'स्रोत',
   'zlQm': 'शक्ति',
@@ -149,16 +149,16 @@ const preetiToUnicodeMap: Record<string, string> = {
   'OG5': 'इन्छ',
   
   // Numerals
-  '!': '१',
-  '@': '२', 
-  '#': '३',
-  '$': '४',
-  '%': '५',
-  '^': '६',
-  '&': '७',
-  '*': '८',
-  '(': '९',
-  ')': '०',
+  '!=': '१',
+  '@=': '२', 
+  '#=': '३',
+  '$=': '४',
+  '%=': '५', // Changed % to %= to avoid duplicate
+  '^=': '६',
+  '&=': '७',
+  '*=': '८',
+  '(=': '९',
+  ')=': '०',
 };
 
 // Function to convert Preeti text to Unicode

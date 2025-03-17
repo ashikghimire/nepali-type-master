@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { getRandomText } from '@/utils/textSamples';
@@ -119,10 +120,10 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
         // Character has been typed
         className = userInput[index] === char 
           ? 'text-foreground' 
-          : 'text-red-500 bg-red-50';
+          : 'text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-900/30';
       } else if (index === userInput.length) {
         // Current character (cursor position)
-        className = 'text-foreground bg-gray-100 animate-pulse-subtle';
+        className = 'text-foreground bg-gray-100 dark:bg-gray-700 animate-pulse-subtle';
       }
       
       return (
@@ -137,7 +138,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
   const unicodeTargetText = preetiToUnicode(targetText);
   
   return (
-    <div className={cn("w-full max-w-screen-lg mx-auto px-4", className)}>
+    <div className={cn("w-full max-w-screen-lg mx-auto px-4 typing-test-container", className)}>
       <div className="mb-8">
         <Stats 
           wpm={wpm} 
@@ -147,7 +148,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
       </div>
       
       <motion.div 
-        className="relative bg-white bg-opacity-50 backdrop-blur-sm rounded-lg p-8 shadow-sm mb-8"
+        className="relative bg-white dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-50 backdrop-blur-sm rounded-lg p-8 shadow-sm mb-8 typing-card"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -157,19 +158,19 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
           <span className="inline-block w-0.5 h-5 bg-foreground ml-0.5 animate-caret-blink"></span>
         </div>
         
-        <div className="text-sm text-muted-foreground mb-6 border-t pt-3">
+        <div className="text-sm text-muted-foreground mb-6 border-t border-border pt-3">
           <p className="mb-1">नेपाली युनिकोड:</p>
           <p className="text-xl text-foreground font-sans">{unicodeTargetText}</p>
         </div>
         
-        <div className="mt-4 p-4 bg-gray-50 rounded-md">
+        <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-md border border-border">
           <p className="text-sm text-muted-foreground mb-1">Current typing:</p>
           <div className="text-xl font-preeti text-foreground">
             {userInput}
             <span className="inline-block w-0.5 h-5 bg-primary ml-0.5 animate-caret-blink"></span>
           </div>
           
-          <div className="mt-2 border-t pt-2">
+          <div className="mt-2 border-t border-border pt-2">
             <p className="text-sm text-muted-foreground mb-1">नेपाली युनिकोड:</p>
             <div className="text-xl text-foreground font-sans">
               {preetiToUnicode(userInput)}

@@ -81,11 +81,29 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
 .font-preeti {
   font-family: 'Preeti', sans-serif;
+}
+
+/* Add transition for smooth theme switching */
+.typing-area {
+  @apply transition-colors duration-300;
+}
+
+/* Dark mode specific styles */
+.dark .typing-test-container {
+  @apply bg-gradient-to-b from-gray-900 to-gray-950;
+}
+
+.dark .typing-card {
+  @apply bg-gray-800 bg-opacity-50;
+}
+
+.light .typing-test-container {
+  @apply bg-gradient-to-b from-white to-gray-50;
 }
