@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { getAllTextSamples } from '@/utils/textSamples';
+import { getRandomText } from '@/utils/textSamples';
 import { calculateWPM, calculateAccuracy, processUserInput, formatTime } from '@/utils/typingUtils';
 import { cn } from '@/lib/utils';
 import Stats from './Stats';
@@ -10,14 +11,8 @@ interface TypingTestProps {
 }
 
 const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
-  // Get all text samples
-  const textSamples = getAllTextSamples();
-  
-  // State for keeping track of the current index
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  
-  // Get the current text entry
-  const currentText = textSamples[currentIndex];
+  // Get random text
+  const [currentText, setCurrentText] = useState(getRandomText());
   
   // Test text and user input
   const [userInput, setUserInput] = useState<string>('');
@@ -36,7 +31,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   
   // Format to display (unicode or preeti)
-  const [displayFormat, setDisplayFormat] = useState<'unicode' | 'preeti'>('unicode');
+  const [displayFormat, setDisplayFormat] = useState<'unicode' | 'preeti'>('preeti');
   
   // Change the display format
   const toggleDisplayFormat = () => {
@@ -53,9 +48,8 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     setWpm(0);
     setAccuracy(100);
     
-    // Generate a random index for the next sample
-    const randomIndex = Math.floor(Math.random() * textSamples.length);
-    setCurrentIndex(randomIndex);
+    // Get a new random text sample
+    setCurrentText(getRandomText());
     
     // Clear any existing timer
     if (timerIntervalRef.current) {
@@ -67,30 +61,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  }, [textSamples]);
-  
-  // Go to the next sample
-  const goToNextSample = () => {
-    const nextIndex = (currentIndex + 1) % textSamples.length;
-    setCurrentIndex(nextIndex);
-    setUserInput('');
-    setIsTestActive(false);
-    setIsTestComplete(false);
-    setTimeElapsed(0);
-    setWpm(0);
-    setAccuracy(100);
-    
-    // Clear any existing timer
-    if (timerIntervalRef.current) {
-      clearInterval(timerIntervalRef.current);
-      timerIntervalRef.current = null;
-    }
-    
-    // Focus the input field
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
+  }, []);
   
   // Start the timer when test becomes active
   const startTimer = useCallback(() => {
@@ -198,19 +169,19 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
       >
         <div className="flex justify-between items-center mb-4">
           <span className="text-gray-400 dark:text-gray-400 text-sm">
-            Sample {currentIndex + 1} of {textSamples.length}
+            Nepali Typing Practice
           </span>
           <button 
             onClick={toggleDisplayFormat}
             className="px-3 py-1 rounded-full bg-gray-700 hover:bg-gray-600 text-gray-300 text-xs transition-colors"
           >
-            {displayFormat === 'unicode' ? 'Unicode' : 'Preeti'} Font
+            {displayFormat === 'unicode' ? 'Use Preeti' : 'Use Unicode'}
           </button>
         </div>
         
         <div className={cn(
           "text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px]",
-          displayFormat === 'preeti' ? 'font-preeti' : 'font-sans'
+          "font-preeti"
         )}>
           {renderText()}
           <span className="inline-block w-0.5 h-5 bg-primary ml-0.5 animate-caret-blink"></span>
@@ -231,8 +202,6 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
           <span className="text-gray-400 dark:text-gray-400">{userInput.length}</span>
           <span> / </span>
           <span>{targetText.length}</span>
-          <span className="mx-2">•</span>
-          <span>{displayFormat === 'unicode' ? 'Unicode' : 'Preeti'} Text</span>
         </div>
         
         <input
@@ -254,13 +223,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
           onClick={startNewTest}
           className="px-6 py-2 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition-opacity duration-200"
         >
-          {isTestComplete ? 'Try Again' : 'Random Text'}
-        </button>
-        <button
-          onClick={goToNextSample}
-          className="px-6 py-2 rounded-full bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors duration-200"
-        >
-          Next Sample
+          {isTestComplete ? 'Try Again' : 'New Text'}
         </button>
       </div>
     </div>

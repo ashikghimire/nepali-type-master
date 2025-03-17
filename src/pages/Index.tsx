@@ -21,10 +21,10 @@ const Index = () => {
             नेपाली टाइपिङ टेस्ट
           </h1>
           <p className="text-gray-400 dark:text-gray-400 text-sm max-w-2xl mx-auto">
-            Improve your Nepali typing speed and accuracy with this typing test
+            Improve your Nepali typing speed in Preeti font format
           </p>
           <div className="mt-4 text-gray-400 text-sm">
-            <p>Practice typing in both Unicode (नेपाली) and Preeti (g]kfnL) formats</p>
+            <p>Practice typing common Nepali phrases and sentences</p>
           </div>
         </motion.div>
         
