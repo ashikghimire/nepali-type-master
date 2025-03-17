@@ -1,21 +1,82 @@
 
-// Authentic Nepali text samples for typing tests in Preeti font mapping
+// Text samples for typing tests in both Unicode and Preeti formats
 
-export const textSamples = [
-  "g]kfn Ps ;'Gb/ b]z xf] . of] lxdfn, kxf8 / t/fO{sf] b]z xf] .",
-  "g]kfnL efiff xfd|f] /fi6«efiff xf] . o;nfO{ af]Ng / n]Vg hfGg' k5{ .",
-  "cfhsf] lbg w]/} /fd|f] 5 . cfsfz ;kmf 5, ;\"o{ rDsL/x]sf] 5 .",
-  "g]kfnL ;+:s[lt / k/Dk/f clt g} ;d[4 5 . xfdLn] o;sf] ;+/If0f ug'{k5{ .",
-  "d]/f] gfd s[i0f xf] . d g]kfndf a:5' . dnfO{ g]kfnL vfgf dg k5{ .",
-  "cfh d]/f] sIffdf gofF lzIfs cfpg'eof] . pxfFn] xfdLnfO{ gofF s'/f l;sfpg'eof] .",
-  "uLtf Ps d]xgtL 5fqf xf] . pm ;w}+ /fd|f] cÍ NofpF5] . ;a}n] p;nfO{ dfof u5{g\\ .",
-  "k9\\g' 1fgsf] ;|f]t xf] . 1fg g} zlQm xf] . xfdLn] ;w}+ k9\\g] afgL a;fNg'k5{ .",
-  "/fd / Zofd b'O{ ;fyL x'g\\ . ltgLx¿ ;w}+ ;Fu} v]N5g\\ / k9\\5g\\ .",
-  "g]kfndf rf8kj{x¿sf] w]/} dxTj 5 . b;}+, ltxf/, 57 / cGo rf8x¿ v';Ln] dgfOG5g\\ ."
+interface TextEntry {
+  unicode: string;
+  preeti: string;
+}
+
+// Collection of Nepali sentences in both Unicode and Preeti formats
+export const textSamples: TextEntry[] = [
+  {
+    unicode: "म बिहान चिया खान्छु।",
+    preeti: "d laxfg lrof vfG5'।"
+  },
+  {
+    unicode: "उसले मलाई फोन गर्‍यो।",
+    preeti: "p;n] dnfO{ kmf]g u‍{of]।"
+  },
+  {
+    unicode: "आज मौसम धेरै राम्रो छ।",
+    preeti: "cfh df};d w]/} /fd|f] 5।"
+  },
+  {
+    unicode: "म किताब पढ्दै छु।",
+    preeti: "d lstfa k9\b} 5'।"
+  },
+  {
+    unicode: "हामी सबै विद्यालय जान्छौं।",
+    preeti: "xfdL ;a} ljBfno hfG5f}+।"
+  },
+  {
+    unicode: "तिमी कता जाँदै छौ?",
+    preeti: "ltdL stf hfFb} 5f}?"
+  },
+  {
+    unicode: "खाना स्वादिष्ट छ।",
+    preeti: "vfgf :jflbi6 5।"
+  },
+  {
+    unicode: "म संगीत सुन्दै छु।",
+    preeti: "d ;+uLt ;'Gb} 5'।"
+  },
+  {
+    unicode: "मेरो साथी अमेरिका गएको छ।",
+    preeti: "d]/f] ;fyL cd]l/sf uPsf] 5।"
+  },
+  {
+    unicode: "हाम्रो गाउँ निकै सुन्दर छ।",
+    preeti: "xfd|f] ufpF lgs} ;'Gb/ 5।"
+  },
+  {
+    unicode: "मैले नयाँ जुत्ता किनेँ।",
+    preeti: "d}n] gofF h'Qf lsg]F।"
+  },
+  {
+    unicode: "स्कूलमा रमाइलो भयो।",
+    preeti: ":s\"ndf /dfOnf] eof]।"
+  },
+  {
+    unicode: "बुबाले मलाई उपहार दिनुभयो।",
+    preeti: "a'afn] dnfO{ pkxf/ lbg'eof]।"
+  },
+  {
+    unicode: "आज आइतबार हो।",
+    preeti: "cfh cfOtaf/ xf]।"
+  },
+  {
+    unicode: "नेपाल एउटा सुन्दर देश हो।",
+    preeti: "g]kfn Pp6f ;'Gb/ b]z xf]।"
+  }
 ];
 
-// Function to get a random text sample
-export const getRandomText = (): string => {
+// Get a random text sample
+export const getRandomText = (): TextEntry => {
   const randomIndex = Math.floor(Math.random() * textSamples.length);
   return textSamples[randomIndex];
+};
+
+// Get all text samples
+export const getAllTextSamples = (): TextEntry[] => {
+  return textSamples;
 };

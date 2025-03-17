@@ -12,7 +12,7 @@ const Index = () => {
       
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-12">
         <motion.div 
-          className="w-full max-w-screen-lg mb-6 text-center"
+          className="w-full max-w-screen-lg mb-8 text-center"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -21,8 +21,11 @@ const Index = () => {
             नेपाली टाइपिङ टेस्ट
           </h1>
           <p className="text-gray-400 dark:text-gray-400 text-sm max-w-2xl mx-auto">
-            Improve your Nepali typing speed and accuracy with this elegant typing test
+            Improve your Nepali typing speed and accuracy with this typing test
           </p>
+          <div className="mt-4 text-gray-400 text-sm">
+            <p>Practice typing in both Unicode (नेपाली) and Preeti (g]kfnL) formats</p>
+          </div>
         </motion.div>
         
         <TypingTest />
