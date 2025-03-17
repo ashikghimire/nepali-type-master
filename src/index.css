@@ -95,15 +95,33 @@
   @apply transition-colors duration-300;
 }
 
-/* Dark mode specific styles */
-.dark .typing-test-container {
-  @apply bg-gradient-to-b from-gray-900 to-gray-950;
-}
-
-.dark .typing-card {
-  @apply bg-gray-800 bg-opacity-50;
-}
-
+/* Theme specific styles */
+.dark .typing-test-container,
 .light .typing-test-container {
-  @apply bg-gradient-to-b from-white to-gray-50;
+  @apply bg-transparent;
+}
+
+.dark .typing-card,
+.light .typing-card {
+  @apply bg-gray-900 bg-opacity-90 text-gray-300;
+}
+
+/* Animation for cursor blink */
+@keyframes caretBlink {
+  0%, 70% { opacity: 1; }
+  71%, 100% { opacity: 0; }
+}
+
+.animate-caret-blink {
+  animation: caretBlink 1s infinite;
+}
+
+/* Subtle pulse animation for current character highlight */
+@keyframes pulseSoft {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.animate-pulse-subtle {
+  animation: pulseSoft 1.5s ease-in-out infinite;
 }

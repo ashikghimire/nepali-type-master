@@ -7,56 +7,25 @@ import { motion } from 'framer-motion';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-secondary/20 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-gray-900 dark:bg-gray-900 text-gray-300 dark:text-gray-300 transition-colors duration-300">
       <Header />
       
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-12">
         <motion.div 
-          className="w-full max-w-screen-lg mb-12 text-center"
+          className="w-full max-w-screen-lg mb-6 text-center"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl font-medium tracking-tight mb-4">
+          <h1 className="text-2xl md:text-3xl font-medium tracking-tight mb-2 text-gray-200 dark:text-gray-200">
             नेपाली टाइपिङ टेस्ट
           </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Improve your Nepali typing speed and accuracy with this elegant, minimalist 
-            typing test. Practice with the Preeti font used in many Nepali documents.
+          <p className="text-gray-400 dark:text-gray-400 text-sm max-w-2xl mx-auto">
+            Improve your Nepali typing speed and accuracy with this elegant typing test
           </p>
         </motion.div>
         
         <TypingTest />
-        
-        <motion.div 
-          className="w-full max-w-screen-lg mt-12 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 rounded-lg">
-              <h3 className="text-lg font-medium mb-2">Improve Speed</h3>
-              <p className="text-sm text-muted-foreground">
-                Regular practice will help increase your Nepali typing speed
-              </p>
-            </div>
-            
-            <div className="p-6 rounded-lg">
-              <h3 className="text-lg font-medium mb-2">Build Accuracy</h3>
-              <p className="text-sm text-muted-foreground">
-                Focus on precision to reduce errors in your typing
-              </p>
-            </div>
-            
-            <div className="p-6 rounded-lg">
-              <h3 className="text-lg font-medium mb-2">Track Progress</h3>
-              <p className="text-sm text-muted-foreground">
-                Monitor your improvement with detailed statistics
-              </p>
-            </div>
-          </div>
-        </motion.div>
       </main>
       
       <Footer />

@@ -134,9 +134,6 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     });
   };
   
-  // Convert current targetText to Unicode for display
-  const unicodeTargetText = preetiToUnicode(targetText);
-  
   return (
     <div className={cn("w-full max-w-screen-lg mx-auto px-4 typing-test-container", className)}>
       <div className="mb-8">
@@ -148,34 +145,22 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
       </div>
       
       <motion.div 
-        className="relative bg-white dark:bg-gray-800 bg-opacity-50 dark:bg-opacity-50 backdrop-blur-sm rounded-lg p-8 shadow-sm mb-8 typing-card"
+        className="relative text-center bg-gray-900 dark:bg-gray-900 bg-opacity-90 dark:bg-opacity-90 backdrop-blur-sm rounded-lg p-8 shadow-lg mb-8 typing-card"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="text-2xl leading-relaxed font-preeti mb-4 tracking-wide">
+        <div className="text-lg md:text-2xl leading-relaxed font-mono tracking-wide text-gray-400 dark:text-gray-400 mb-8 min-h-[120px]">
           {renderText()}
-          <span className="inline-block w-0.5 h-5 bg-foreground ml-0.5 animate-caret-blink"></span>
+          <span className="inline-block w-0.5 h-5 bg-primary ml-0.5 animate-caret-blink"></span>
         </div>
         
-        <div className="text-sm text-muted-foreground mb-6 border-t border-border pt-3">
-          <p className="mb-1">नेपाली युनिकोड:</p>
-          <p className="text-xl text-foreground font-sans">{unicodeTargetText}</p>
-        </div>
-        
-        <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-md border border-border">
-          <p className="text-sm text-muted-foreground mb-1">Current typing:</p>
-          <div className="text-xl font-preeti text-foreground">
-            {userInput}
-            <span className="inline-block w-0.5 h-5 bg-primary ml-0.5 animate-caret-blink"></span>
-          </div>
-          
-          <div className="mt-2 border-t border-border pt-2">
-            <p className="text-sm text-muted-foreground mb-1">नेपाली युनिकोड:</p>
-            <div className="text-xl text-foreground font-sans">
-              {preetiToUnicode(userInput)}
-            </div>
-          </div>
+        <div className="text-center text-xs text-gray-500 dark:text-gray-500 mb-2">
+          <span className="text-gray-400 dark:text-gray-400">{userInput.length}</span>
+          <span> / </span>
+          <span>{targetText.length}</span>
+          <span className="mx-2">•</span>
+          <span>{preetiToUnicode(targetText).substring(0, 20)}...</span>
         </div>
         
         <input
