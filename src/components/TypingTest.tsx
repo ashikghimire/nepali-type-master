@@ -31,8 +31,8 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
   // References
   const inputRef = useRef<HTMLInputElement>(null);
   
-  // Format to display (fixed to preeti, with unicode translation)
-  const [displayFormat, setDisplayFormat] = useState<'preeti'>('preeti');
+  // Format to display (now fixed to unicode, with preeti translation)
+  const [displayFormat, setDisplayFormat] = useState<'unicode'>('unicode');
   
   // Start a new test with random text
   const startNewTest = useCallback(() => {
@@ -81,8 +81,8 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     
     setUserInput(value);
     
-    // Get the target text based on the current display format
-    const targetText = currentText.preeti;
+    // Get the target text based on the current display format (now unicode)
+    const targetText = currentText.unicode;
     
     // Process the input to calculate stats
     const { correctChars, errorChars } = processUserInput(targetText, value);
@@ -132,11 +132,11 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     };
   }, [startNewTest]);
   
-  // Get the current target text (always preeti)
-  const targetText = currentText.preeti;
+  // Get the current target text (now unicode)
+  const targetText = currentText.unicode;
   
-  // Translation is always Unicode
-  const translationText = currentText.unicode;
+  // Translation is now Preeti
+  const translationText = currentText.preeti;
   
   // Calculate how much of the translation to highlight based on user input progress
   const highlightedChars = Math.min(userInput.length, targetText.length);
@@ -234,14 +234,14 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
             </span>
           </div>
           
-          <div className="text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px] font-preeti">
+          <div className="text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px]">
             {renderText()}
             <span className="inline-block w-0.5 h-5 bg-primary ml-0.5 animate-caret-blink"></span>
           </div>
           
           <div className="mb-4">
-            <h3 className="text-gray-300 mb-2 text-left">Translation (Unicode):</h3>
-            <div className="text-gray-400 text-left">
+            <h3 className="text-gray-300 mb-2 text-left">Translation (Preeti):</h3>
+            <div className="text-gray-400 text-left font-preeti">
               {renderTranslation()}
             </div>
           </div>
