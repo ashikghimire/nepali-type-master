@@ -12,102 +12,102 @@ export const textSamples: TextEntry[] = [
   {
     unicode: "म बिहान चिया खान्छु।",
     preeti: "d laxfg lrof vfG5'।",
-    english: "I drink tea in the morning."
+    english: "d laxfg lrof vfG5'।"
   },
   {
     unicode: "उसले मलाई फोन गर्‍यो।",
     preeti: "p;n] dnfO{ kmf]g u‍{of]।",
-    english: "He called me on the phone."
+    english: "p;n] dnfO{ kmf]g u‍{of]।"
   },
   {
     unicode: "आज मौसम धेरै राम्रो छ।",
     preeti: "cfh df};d w]/} /fd|f] 5।",
-    english: "The weather is very nice today."
+    english: "cfh df};d w]/} /fd|f] 5।"
   },
   {
     unicode: "म किताब पढ्दै छु।",
     preeti: "d lstfa k9\b} 5'।",
-    english: "I am reading a book."
+    english: "d lstfa k9\b} 5'।"
   },
   {
     unicode: "हामी सबै विद्यालय जान्छौं।",
     preeti: "xfdL ;a} ljBfno hfG5f}+।",
-    english: "We all go to school."
+    english: "xfdL ;a} ljBfno hfG5f}+।"
   },
   {
     unicode: "तिमी कता जाँदै छौ?",
     preeti: "ltdL stf hfFb} 5f}?",
-    english: "Where are you going?"
+    english: "ltdL stf hfFb} 5f}?"
   },
   {
     unicode: "खाना स्वादिष्ट छ।",
     preeti: "vfgf :jflbi6 5।",
-    english: "The food is delicious."
+    english: "vfgf :jflbi6 5।"
   },
   {
     unicode: "म संगीत सुन्दै छु।",
     preeti: "d ;+uLt ;'Gb} 5'।",
-    english: "I am listening to music."
+    english: "d ;+uLt ;'Gb} 5'।"
   },
   {
     unicode: "मेरो साथी अमेरिका गएको छ।",
     preeti: "d]/f] ;fyL cd]l/sf uPsf] 5।",
-    english: "My friend has gone to America."
+    english: "d]/f] ;fyL cd]l/sf uPsf] 5।"
   },
   {
     unicode: "हाम्रो गाउँ निकै सुन्दर छ।",
     preeti: "xfd|f] ufpF lgs} ;'Gb/ 5।",
-    english: "Our village is very beautiful."
+    english: "xfd|f] ufpF lgs} ;'Gb/ 5।"
   },
   {
     unicode: "मैले नयाँ जुत्ता किनेँ।",
     preeti: "d}n] gofF h'Qf lsg]F।",
-    english: "I bought new shoes."
+    english: "d}n] gofF h'Qf lsg]F।"
   },
   {
     unicode: "स्कूलमा रमाइलो भयो।",
     preeti: ":s\"ndf /dfOnf] eof]।",
-    english: "It was fun at school."
+    english: ":s\"ndf /dfOnf] eof]।"
   },
   {
     unicode: "बुबाले मलाई उपहार दिनुभयो।",
     preeti: "a'afn] dnfO{ pkxf/ lbg'eof]।",
-    english: "Father gave me a gift."
+    english: "a'afn] dnfO{ pkxf/ lbg'eof]।"
   },
   {
     unicode: "आज आइतबार हो।",
     preeti: "cfh cfOtaf/ xf]।",
-    english: "Today is Sunday."
+    english: "cfh cfOtaf/ xf]।"
   },
   {
     unicode: "नेपाल एउटा सुन्दर देश हो।",
     preeti: "g]kfn Pp6f ;'Gb/ b]z xf]।",
-    english: "Nepal is a beautiful country."
+    english: "g]kfn Pp6f ;'Gb/ b]z xf]।"
   },
   {
     unicode: "म क्रिकेट खेल्न जान्छु।",
     preeti: "d lqms]6 v]n\g hfG5'।",
-    english: "I go to play cricket."
+    english: "d lqms]6 v]n\g hfG5'।"
   },
   {
     unicode: "हिजो राति धेरै पानी पर्‍यो।",
     preeti: "lxhf] /flt w]/} kfgL k‍{of]।",
-    english: "It rained a lot last night."
+    english: "lxhf] /flt w]/} kfgL k‍{of]।"
   },
   {
     unicode: "मलाई पढ्न मन पर्छ।",
     preeti: "dnfO{ k9\g dg k5{।",
-    english: "I like to read."
+    english: "dnfO{ k9\g dg k5{।"
   },
   {
     unicode: "तिमी किन रिसाएको?",
     preeti: "ltdL lsg l/;fPsf]?",
-    english: "Why are you angry?"
+    english: "ltdL lsg l/;fPsf]?"
   },
   {
     unicode: "हामी सिनेमामा जाने योजना बनाउँदै छौं।",
     preeti: "xfdL l;g]dfdf hfg] of]hgf agfpFb} 5f}+।",
-    english: "We are planning to go to the cinema."
+    english: "xfdL l;g]dfdf hfg] of]hgf agfpFb} 5f}+।"
   }
 ];
 

@@ -31,17 +31,8 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
   // References
   const inputRef = useRef<HTMLInputElement>(null);
   
-  // Format to display (unicode, preeti, or english)
-  const [displayFormat, setDisplayFormat] = useState<'unicode' | 'preeti' | 'english'>('preeti');
-  
-  // Change the display format
-  const toggleDisplayFormat = () => {
-    setDisplayFormat(prev => {
-      if (prev === 'unicode') return 'preeti';
-      if (prev === 'preeti') return 'english';
-      return 'unicode';
-    });
-  };
+  // Format to display (fixed to preeti, with unicode translation)
+  const [displayFormat, setDisplayFormat] = useState<'preeti'>('preeti');
   
   // Start a new test with random text
   const startNewTest = useCallback(() => {
@@ -91,10 +82,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     setUserInput(value);
     
     // Get the target text based on the current display format
-    const targetText = 
-      displayFormat === 'unicode' ? currentText.unicode : 
-      displayFormat === 'preeti' ? currentText.preeti :
-      currentText.english;
+    const targetText = currentText.preeti;
     
     // Process the input to calculate stats
     const { correctChars, errorChars } = processUserInput(targetText, value);
@@ -144,17 +132,11 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     };
   }, [startNewTest]);
   
-  // Get the current target text based on display format
-  const targetText = 
-    displayFormat === 'unicode' ? currentText.unicode : 
-    displayFormat === 'preeti' ? currentText.preeti :
-    currentText.english;
+  // Get the current target text (always preeti)
+  const targetText = currentText.preeti;
   
-  // Determine which text to show as translation (cycle through the three formats)
-  const translationText = 
-    displayFormat === 'unicode' ? currentText.preeti : 
-    displayFormat === 'preeti' ? currentText.english :
-    currentText.unicode;
+  // Translation is always Unicode
+  const translationText = currentText.unicode;
   
   // Calculate how much of the translation to highlight based on user input progress
   const highlightedChars = Math.min(userInput.length, targetText.length);
@@ -199,14 +181,6 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
       );
     });
   };
-
-  // Determine if the current text should use Preeti font
-  const shouldUsePreetiFont = displayFormat === 'preeti' || 
-    (displayFormat === 'english' && translationText === currentText.preeti);
-  
-  // Determine if the translation should use Preeti font
-  const translationUsePreetiFont = displayFormat === 'unicode' || 
-    (displayFormat === 'english' && translationText === currentText.preeti);
   
   return (
     <div className={cn("w-full max-w-screen-lg mx-auto px-4 typing-test-container", className)}>
@@ -258,29 +232,16 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
             <span className="text-gray-400 dark:text-gray-400 text-sm">
               Nepali Typing Practice
             </span>
-            <button 
-              onClick={toggleDisplayFormat}
-              className="px-3 py-1 rounded-full bg-gray-700 hover:bg-gray-600 text-gray-300 text-xs transition-colors"
-            >
-              {displayFormat === 'unicode' ? 'Use Preeti' : 
-               displayFormat === 'preeti' ? 'Use English' : 'Use Unicode'}
-            </button>
           </div>
           
-          <div className={cn(
-            "text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px]",
-            shouldUsePreetiFont ? "font-preeti" : ""
-          )}>
+          <div className="text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px] font-preeti">
             {renderText()}
             <span className="inline-block w-0.5 h-5 bg-primary ml-0.5 animate-caret-blink"></span>
           </div>
           
           <div className="mb-4">
-            <h3 className="text-gray-300 mb-2 text-left">Translation:</h3>
-            <div className={cn(
-              "text-gray-400 text-left",
-              translationUsePreetiFont ? "font-preeti" : ""
-            )}>
+            <h3 className="text-gray-300 mb-2 text-left">Translation (Unicode):</h3>
+            <div className="text-gray-400 text-left">
               {renderTranslation()}
             </div>
           </div>

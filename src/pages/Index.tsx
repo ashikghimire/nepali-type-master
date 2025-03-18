@@ -21,10 +21,10 @@ const Index = () => {
             नेपाली टाइपिङ प्रशिक्षण
           </h1>
           <p className="text-gray-400 dark:text-gray-400 text-sm max-w-2xl mx-auto">
-            Master Nepali typing with Preeti, Unicode or English input
+            Practice typing Nepali in Preeti format
           </p>
           <div className="mt-4 text-gray-400 text-sm">
-            <p>Type complete sentences in your preferred format, see real-time translation, and track your progress</p>
+            <p>Type the Preeti font format (Roman alphabet) and see real-time Unicode Nepali translation</p>
           </div>
         </motion.div>
         
