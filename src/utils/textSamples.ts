@@ -1,4 +1,3 @@
-
 // Text samples for typing tests in Unicode, Preeti and English formats
 
 interface TextEntry {
@@ -9,6 +8,11 @@ interface TextEntry {
 
 // Collection of sentences in Unicode, Preeti and English formats
 export const textSamples: TextEntry[] = [
+  {
+    unicode: "क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म य र ल व श ष स ह क्ष त्र ज्ञ",
+    preeti: "s v u 3 ª r 5 h em ` 6 7 8 9 0f t y b w g k km a e d o / n j z if ; x If q 1",
+    english: "s v u 3 ª r 5 h em ` 6 7 8 9 0f t y b w g k km a e d o / n j z if ; x If q 1"
+  },
   {
     unicode: "म बिहान चिया खान्छु।",
     preeti: "d laxfg lrof vfG5'।",
