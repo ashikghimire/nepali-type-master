@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { getRandomText } from '@/utils/textSamples';
@@ -132,25 +131,21 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     };
   }, [startNewTest]);
   
-  // Get the current target text (now unicode)
-  const targetText = currentText.unicode;
+  // Get the current target texts
+  const unicodeText = currentText.unicode;
+  const preetiText = currentText.preeti;
   
-  // Translation is now Preeti
-  const translationText = currentText.preeti;
+  // Calculate highlights for both formats
+  const highlightedChars = Math.min(userInput.length, unicodeText.length);
   
-  // Calculate how much of the translation to highlight based on user input progress
-  const highlightedChars = Math.min(userInput.length, targetText.length);
-  const highlightRatio = targetText.length > 0 ? highlightedChars / targetText.length : 0;
-  const highlightedTranslationChars = Math.floor(translationText.length * highlightRatio);
-  
-  // Render characters with correct/incorrect highlighting
-  const renderText = () => {
-    return targetText.split('').map((char, index) => {
+  // Render characters with correct/incorrect highlighting for both formats
+  const renderText = (text: string, isPreeti: boolean) => {
+    return text.split('').map((char, index) => {
       let className = 'text-muted-foreground';
       
       if (index < userInput.length) {
         // Character has been typed
-        className = userInput[index] === char 
+        className = userInput[index] === (isPreeti ? preetiText[index] : unicodeText[index])
           ? 'text-foreground' 
           : 'text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-900/30';
       } else if (index === userInput.length) {
@@ -165,23 +160,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
       );
     });
   };
-  
-  // Render translation with progressive highlighting
-  const renderTranslation = () => {
-    return translationText.split('').map((char, index) => {
-      const isHighlighted = index < highlightedTranslationChars;
-      const className = isHighlighted 
-        ? 'text-primary' 
-        : 'text-gray-400';
-        
-      return (
-        <span key={index} className={className}>
-          {char}
-        </span>
-      );
-    });
-  };
-  
+
   return (
     <div className={cn("w-full max-w-screen-lg mx-auto px-4 typing-test-container", className)}>
       <div className="mb-8">
@@ -234,22 +213,29 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
             </span>
           </div>
           
-          <div className="text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px]">
-            {renderText()}
-            <span className="inline-block w-0.5 h-5 bg-primary ml-0.5 animate-caret-blink"></span>
-          </div>
-          
-          <div className="mb-4">
-            <h3 className="text-gray-300 mb-2 text-left">Translation (Preeti):</h3>
-            <div className="text-gray-400 text-left font-preeti">
-              {renderTranslation()}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Unicode Format */}
+            <div className="space-y-2">
+              <h3 className="text-gray-300 mb-2 text-left">Unicode (नेपाली):</h3>
+              <div className="text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px]">
+                {renderText(unicodeText, false)}
+                <span className="inline-block w-0.5 h-5 bg-primary ml-0.5 animate-caret-blink"></span>
+              </div>
+            </div>
+
+            {/* Preeti Format */}
+            <div className="space-y-2">
+              <h3 className="text-gray-300 mb-2 text-left">Preeti (Roman):</h3>
+              <div className="text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px] font-preeti">
+                {renderText(preetiText, true)}
+              </div>
             </div>
           </div>
           
           <div className="text-center text-xs text-gray-500 dark:text-gray-500 mb-2">
             <span className="text-gray-400 dark:text-gray-400">{userInput.length}</span>
             <span> / </span>
-            <span>{targetText.length}</span>
+            <span>{unicodeText.length}</span>
           </div>
           
           <input
