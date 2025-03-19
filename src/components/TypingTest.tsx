@@ -5,6 +5,7 @@ import { getRandomText } from '@/utils/textSamples';
 import { calculateWPM, calculateAccuracy, processUserInput, formatTime } from '@/utils/typingUtils';
 import { cn } from '@/lib/utils';
 import Stats from './Stats';
+import { preetiToUnicode } from '@/utils/preetiToUnicode';
 
 interface TypingTestProps {
   className?: string;
@@ -19,6 +20,9 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
   const [isTestActive, setIsTestActive] = useState<boolean>(false);
   const [isTestComplete, setIsTestComplete] = useState<boolean>(false);
   const [showFinalScore, setShowFinalScore] = useState<boolean>(false);
+  
+  // Live Nepali conversion preview
+  const [liveNepaliPreview, setLiveNepaliPreview] = useState<string>('');
   
   // Timer state
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
@@ -44,6 +48,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     setTimeElapsed(0);
     setWpm(0);
     setAccuracy(100);
+    setLiveNepaliPreview('');
     
     // Get a new random text sample
     setCurrentText(getRandomText());
@@ -80,6 +85,15 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     }
     
     setUserInput(value);
+
+    // Generate live Nepali preview of what the user is typing
+    try {
+      const nepaliPreview = preetiToUnicode(value);
+      setLiveNepaliPreview(nepaliPreview);
+    } catch (err) {
+      console.error("Error converting Preeti to Unicode:", err);
+      setLiveNepaliPreview('Conversion error');
+    }
     
     // Get the target text based on the current display format (now unicode)
     const targetText = currentText.unicode;
@@ -104,6 +118,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     setTimeout(() => {
       setUserInput('');
       setCurrentText(getRandomText());
+      setLiveNepaliPreview('');
     }, 500);
   };
   
@@ -233,7 +248,20 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
             </div>
           </div>
           
-          <div className="text-center text-xs text-gray-500 dark:text-gray-500 mb-2">
+          {/* Live Nepali Preview of Preeti Input */}
+          {userInput.length > 0 && (
+            <div className="mt-6 p-4 bg-gray-800 rounded-lg">
+              <h3 className="text-gray-300 mb-2 text-left">Your Nepali Text:</h3>
+              <div className="text-lg md:text-xl leading-relaxed tracking-wide text-gray-300 mb-2 min-h-[40px]">
+                {liveNepaliPreview}
+              </div>
+              <div className="text-xs text-gray-500 text-left">
+                Live Unicode conversion of your input
+              </div>
+            </div>
+          )}
+          
+          <div className="text-center text-xs text-gray-500 dark:text-gray-500 mb-2 mt-4">
             <span className="text-gray-400 dark:text-gray-400">{userInput.length}</span>
             <span> / </span>
             <span>{unicodeText.length}</span>
