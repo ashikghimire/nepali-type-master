@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { getRandomText } from '@/utils/textSamples';
@@ -225,8 +226,8 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
 
             {/* Preeti Format */}
             <div className="space-y-2">
-              <h3 className="text-gray-300 mb-2 text-left">Preeti (Roman):</h3>
-              <div className="text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px] font-preeti">
+              <h3 className="text-gray-300 mb-2 text-left">Preeti:</h3>
+              <div className="text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px] font-mono">
                 {renderText(preetiText, true)}
               </div>
             </div>

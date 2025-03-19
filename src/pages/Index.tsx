@@ -24,7 +24,7 @@ const Index = () => {
             Practice typing Nepali with both Unicode and Preeti formats
           </p>
           <div className="mt-4 text-gray-400 text-sm">
-            <p>See both Unicode Nepali (नेपाली) and Preeti (Roman) formats side by side as you type</p>
+            <p>Improve your typing skills while viewing both formats simultaneously</p>
           </div>
         </motion.div>
         
