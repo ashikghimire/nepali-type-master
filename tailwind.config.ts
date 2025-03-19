@@ -91,6 +91,20 @@ export default {
         'caret-blink': {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0' }
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' }
+        },
+        'bounce-light': {
+          '0%, 100%': { 
+            transform: 'translateY(-3px)',
+            animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)'
+          },
+          '50%': { 
+            transform: 'translateY(0)',
+            animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)'
+          }
         }
       },
       animation: {
@@ -100,7 +114,9 @@ export default {
         'fade-out': 'fade-out 0.3s ease-out',
         'slide-up': 'slide-up 0.4s ease-out',
         'pulse-subtle': 'pulse-subtle 2s infinite',
-        'caret-blink': 'caret-blink 1s infinite'
+        'caret-blink': 'caret-blink 1s infinite',
+        'spin-slow': 'spin-slow 3s linear infinite',
+        'bounce-light': 'bounce-light 1s infinite'
       }
     }
   },
