@@ -14,6 +14,11 @@ export const textSamples: TextEntry[] = [
     english: "s v u 3 ª r 5 h em ` 6 7 8 9 0f t y b w g k km a e d o / n j z if ; x If q 1"
   },
   {
+    unicode: "तलको बक्समा प्रीति फन्टका अक्षरहरू लेख्नुहोस् वा पेस्ट गर्नुहोस्",
+    preeti: "tnsf] aS;df k|Llt kmG6sf cIf/x? n]Vg'xf]:f\\ jf k]:6 ug{'xf];\\",
+    english: "tnsf] aS;df k|Llt kmG6sf cIf/x? n]Vg'xf]:f\\ jf k]:6 ug{'xf];\\"
+  },
+  {
     unicode: "म बिहान चिया खान्छु।",
     preeti: "d laxfg lrof vfG5'।",
     english: "d laxfg lrof vfG5'।"
@@ -124,4 +129,9 @@ export const getRandomText = (): TextEntry => {
 // Get all text samples
 export const getAllTextSamples = (): TextEntry[] => {
   return textSamples;
+};
+
+// Get a specific text sample
+export const getSpecificText = (index: number): TextEntry => {
+  return textSamples[index % textSamples.length];
 };

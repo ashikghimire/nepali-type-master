@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { getRandomText } from '@/utils/textSamples';
+import { getRandomText, getSpecificText } from '@/utils/textSamples';
 import { calculateWPM, calculateAccuracy, processUserInput, formatTime } from '@/utils/typingUtils';
 import { cn } from '@/lib/utils';
 import Stats from './Stats';
@@ -10,8 +10,8 @@ interface TypingTestProps {
 }
 
 const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
-  // Get random text
-  const [currentText, setCurrentText] = useState(getRandomText());
+  // Get the specific Preeti instruction text first (the one at index 1)
+  const [currentText, setCurrentText] = useState(getSpecificText(1));
   
   // Test text and user input
   const [userInput, setUserInput] = useState<string>('');
@@ -121,7 +121,10 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
   
   // Start a new test on component mount
   useEffect(() => {
-    startNewTest();
+    // Focus the input field
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
     
     return () => {
       // Clean up timer on unmount
@@ -129,7 +132,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
         clearInterval(timerIntervalRef.current);
       }
     };
-  }, [startNewTest]);
+  }, []);
   
   // Get the current target texts
   const unicodeText = currentText.unicode;
