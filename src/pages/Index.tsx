@@ -25,7 +25,7 @@ const Index = () => {
           </p>
           <div className="mt-4 text-gray-400 text-sm">
             <p>तलको बक्समा प्रीति फन्टका अक्षरहरू लेख्नुहोस् वा पेस्ट गर्नुहोस्</p>
-            <p className="font-preeti mt-2">tnsf] aS;df k|Llt kmG6sf cIf/x? n]Vg&apos;xf]:f\ jf k]:6 ug{&apos;xf];</p>
+            <p className="font-preeti mt-2">tnsf] aS;df k|Llt kmG6sf cIf/x? n]Vg{"'"}xf]:f\ jf k]:6 ug{{"'"}xf];</p>
           </div>
         </motion.div>
         
