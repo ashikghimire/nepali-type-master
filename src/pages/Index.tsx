@@ -1,11 +1,14 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '@/components/Header';
 import TypingTest from '@/components/TypingTest';
+import TextBreakdown from '@/components/TextBreakdown';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
 
 const Index = () => {
+  const [showBreakdown, setShowBreakdown] = useState(false);
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-900 dark:bg-gray-900 text-gray-300 dark:text-gray-300 transition-colors duration-300">
       <Header />
@@ -23,12 +26,24 @@ const Index = () => {
           <p className="text-gray-400 dark:text-gray-400 text-sm max-w-2xl mx-auto">
             Practice typing Nepali with both Unicode and Preeti formats
           </p>
-          <div className="mt-4 text-gray-400 text-sm">
-            <p>Improve your typing skills while viewing both formats simultaneously</p>
+          
+          <div className="mt-6 flex justify-center gap-4">
+            <button 
+              onClick={() => setShowBreakdown(false)} 
+              className={`px-4 py-2 rounded-md ${!showBreakdown ? 'bg-primary text-white' : 'bg-gray-700 text-gray-300'}`}
+            >
+              Practice Typing
+            </button>
+            <button 
+              onClick={() => setShowBreakdown(true)} 
+              className={`px-4 py-2 rounded-md ${showBreakdown ? 'bg-primary text-white' : 'bg-gray-700 text-gray-300'}`}
+            >
+              Text Breakdown
+            </button>
           </div>
         </motion.div>
         
-        <TypingTest />
+        {showBreakdown ? <TextBreakdown /> : <TypingTest />}
       </main>
       
       <Footer />

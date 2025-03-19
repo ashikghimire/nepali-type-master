@@ -1,3 +1,4 @@
+
 // Text samples for typing tests in Unicode, Preeti and English formats
 
 interface TextEntry {
@@ -124,4 +125,23 @@ export const getRandomText = (): TextEntry => {
 // Get all text samples
 export const getAllTextSamples = (): TextEntry[] => {
   return textSamples;
+};
+
+// Longer educational text for special display
+export const educationText = {
+  title: "शिक्षा: मानव सभ्यताको मेरुदण्ड",
+  unicode: [
+    "शिक्षा मानव सभ्यताको मेरुदण्ड हो। यो समाजको उन्नति, समृद्धि र सांस्कृतिक संरक्षणको लागि महत्त्वपूर्ण तत्व हो। शिक्षाले व्यक्ति मात्र नभई समग्र राष्ट्रलाई मार्गदर्शन गर्छ। कुनै पनि देशको उन्नति शिक्षाको स्तरमा निर्भर गर्दछ। ज्ञानको गहिराइमा पुग्नका लागि शिक्षा अनिवार्य छ।",
+    "शिक्षा व्यक्तिको बौद्धिक क्षमता अभिवृद्धि गर्ने माध्यम हो। शिक्षाले तार्किक सोचाइलाई प्रखर बनाउँछ र विश्लेषणात्मक दृष्टिकोण विकसित गर्छ। व्यावहारिक जीवनमा कठिन परिस्थिति समाधान गर्न शिक्षाले मुख्य भूमिका खेल्छ। उदाहरणस्वरूप, वैज्ञानिक अनुसन्धानहरू, प्रविधिको विकास, औद्योगिक क्रान्ति आदिको मूल आधार नै शिक्षा हो।",
+    "शिक्षाको अभावमा समाज अन्योलग्रस्त हुन्छ। अशिक्षित समुदायमा अन्धविश्वास, दुराचार, कुरीति तथा कुप्रथाहरू व्याप्त हुन्छन्। शिक्षित समाजमा नैतिक मूल्यहरू, सहिष्णुता, समावेशी दृष्टिकोण र समानता प्रवर्द्धन हुन्छ। शिक्षाले व्यक्तिलाई नैतिकता, उत्तरदायित्व तथा नागरिक कर्तव्यबारे सचेत बनाउँछ।",
+    "आजको डिजिटल युगमा शिक्षाले प्रविधिसँग हातेमालो गर्दै अगाडि बढ्नु आवश्यक छ। प्रविधिको प्रभावशाली उपयोगले शिक्षालाई सहज, आकर्षक र प्रभावकारी बनाउँछ। अनलाइन शिक्षा, कृत्रिम बुद्धिमत्ता, डिजिटल कक्षा आदिले आधुनिक शिक्षामा क्रान्ति ल्याएका छन्। तर, प्रविधिको असीमित प्रयोगले मानिसलाई आलस्य, परनिर्भरता र सामाजिक अलगावको अवस्थामा पुर्‍याउने खतरा पनि रहन्छ।",
+    "समग्रमा, शिक्षा एक अमूल्य सम्पत्ति हो जसले व्यक्तिलाई आत्मनिर्भर, सक्षम र जागरूक बनाउँछ। शिक्षित नागरिक राष्ट्रको मेरुदण्ड हुन्। शिक्षाको माध्यमबाट मात्र देश समुन्नत, सुव्यवस्थित र सुसंस्कृत बन्न सक्छ। त्यसैले, हाम्रा सबै नीति तथा योजनाहरू शिक्षाको प्रवर्द्धनमा केन्द्रित हुनुपर्छ।"
+  ],
+  preeti: [
+    "lzIff dfgj ;Eotfsf] d]?b08 xf]. of] ;dfhsf] pGglt, ;d[l4 / ;f+:s[lts ;+/If0fsf] nflu dxQ\jk"0f{ tTj xf]. lzIffn] JolQm dfq geO{ ;du| /fi6«nfO{ dfu{bz{g u5{. s'g} klg b]zsf] pGglt lzIffsf] :t/df lge{/ ub{5. 1fgsf] ulx/fOdf k'Ugsf nflu lzIff clgjfo{ 5.",
+    "lzIff JolQmsf] af}l4s Ifdtf clej[l4 ug{] dfWod xf]. lzIffn] tfls{s ;f]rfOnfO{ k|v/ agfpF5 / ljZn]if0ffTds b[li6sf]0f ljsl;t u5{. Jofjxfl/s hLjgdf sl7g kl/l:ylt ;dfwfg ug{ lzIffn] d'Vo e"ldsf v]n\5. pbfx/0f:j¿k, j}1flgs cg';Gwfgx¿, k|ljlwsf] ljsf;, cf}Bf]lus qmflGt cflbsf] d"n cfwf/ g} lzIff xf].",
+    "lzIffsf] cefjdf ;dfh cGof]nu|:t x'G5. clzlIft ;d'bfodf cGwljZjf;, b'/frf/, s'/Llt tyf s'k|yfx¿ JofKt x'G5G. lzlIft ;dfhdf g}lts d"n\ox¿, ;lxi0f'tf, ;dfj]zL b[li6sf]0f / ;dfgtf k|j4{g x'G5. lzIffn] JolQmnfO{ g}ltstf, pQ/bfloTj tyf gful/s st{Joaf/] ;r]t agfpF5.",
+    "cfhsf] l8lh6n o'udf lzIffn] k|ljlw;Fu xft]dfnf] ub{} cufl8 a9\g' cfjZos 5. k|ljlwsf] k|efjzfnL pkof]un] lzIffnfO{ ;xh, cfsif{s / k|efjsf/L agfpF5. cgnfOg lzIff, s[lqd a'l4dQf, l8lh6n sIff cflbn] cfw'lgs lzIffdf qmflGt n\ofPsf 5G. t/, k|ljlwsf] c;Lldt k|of]un] dflg;nfO{ cfn:o, k/lge{/tf / ;fdflhs cnufjsf] cj:yfdf k'‍{ofpg] vt/f klg /xG5.",
+    ";du|df, lzIff Ps cd"n\o ;Dklq\ xf] h;n] JolQmnfO{ cfTdlge{/, ;Ifd / hfu¿s agfpF5. lzlIft gful/s /fi6«sf] d]?b08 x'G. lzIffsf] dfWodaf6 dfq b]z ;d'Ggt, ;'Jojl:yt / ;';+:s[t aGg ;S5. To;}n], xfd|f ;a} gLlt tyf of]hgfx¿ lzIffsf] k|j4{gdf s]lG›t x'g'k5{."
+  ]
 };
