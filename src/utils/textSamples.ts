@@ -138,10 +138,10 @@ export const educationText = {
     "समग्रमा, शिक्षा एक अमूल्य सम्पत्ति हो जसले व्यक्तिलाई आत्मनिर्भर, सक्षम र जागरूक बनाउँछ। शिक्षित नागरिक राष्ट्रको मेरुदण्ड हुन्। शिक्षाको माध्यमबाट मात्र देश समुन्नत, सुव्यवस्थित र सुसंस्कृत बन्न सक्छ। त्यसैले, हाम्रा सबै नीति तथा योजनाहरू शिक्षाको प्रवर्द्धनमा केन्द्रित हुनुपर्छ।"
   ],
   preeti: [
-    "lzIff dfgj ;Eotfsf] d]?b08 xf]. of] ;dfhsf] pGglt, ;d[l4 / ;f+:s[lts ;+/If0fsf] nflu dxQ\jk"0f{ tTj xf]. lzIffn] JolQm dfq geO{ ;du| /fi6«nfO{ dfu{bz{g u5{. s'g} klg b]zsf] pGglt lzIffsf] :t/df lge{/ ub{5. 1fgsf] ulx/fOdf k'Ugsf nflu lzIff clgjfo{ 5.",
+    "lzIff dfgj ;Eotfsf] d]?b08 xf]. of] ;dfhsf] pGglt, ;d[l4 / ;f+:s[lts ;+/If0fsf] nflu dxTTjk\"0f{ tTj xf]. lzIffn] JolQm dfq geO{ ;du| /fi6«nfO{ dfu{bz{g u5{. s'g} klg b]zsf] pGglt lzIffsf] :t/df lge{/ ub{5. 1fgsf] ulx/fOdf k'Ugsf nflu lzIff clgjfo{ 5.",
     "lzIff JolQmsf] af}l4s Ifdtf clej[l4 ug{] dfWod xf]. lzIffn] tfls{s ;f]rfOnfO{ k|v/ agfpF5 / ljZn]if0ffTds b[li6sf]0f ljsl;t u5{. Jofjxfl/s hLjgdf sl7g kl/l:ylt ;dfwfg ug{ lzIffn] d'Vo e\"ldsf v]Nb5. pbfx/0f:j¿k, j}1flgs cg';Gwfgx¿, k|ljlwsf] ljsf;, cf}Bf]lus qmflGt cflbsf] d\"n cfwf/ g} lzIff xf].",
-    "lzIffsf] cefjdf ;dfh cGof]nu|:t x'G5. clzlIft ;d'bfodf cGwljZjf;, b'/frf/, s'/Llt tyf s'k|yfx¿ JofKt x'G5g\. lzlIft ;dfhdf g}lts d\"Nox¿, ;lxi0f'tf, ;dfj]zL b[li6sf]0f / ;dfgtf k|j4{g x'G5. lzIffn] JolQmnfO{ g}ltstf, pQ/bfloTj tyf gful/s st{Joaf/] ;r]t agfpF5.",
-    "cfhsf] l8lh6n o'udf lzIffn] k|ljlw;Fu xft]dfnf] ub{} cufl8 a9\g' cfjZos 5. k|ljlwsf] k|efjzfnL pkof]un] lzIffnfO{ ;xh, cfsif{s / k|efjsf/L agfpF5. cgnfOg lzIff, s[lqd a'l4dQf, l8lh6n sIff cflbn] cfw'lgs lzIffdf qmflGt NofPsf 5g\. t/, k|ljlwsf] c;Lldt k|of]un] dflg;nfO{ cfn:o, k/lge{/tf / ;fdflhs cnufjsf] cj:yfdf k'¥ofpg] vt/f klg /xG5.",
-    ";du|df, lzIff Ps cd\"No ;DklQ xf] h;n] JolQmnfO{ cfTdlge{/, ;Ifd / hfu¿s agfpF5. lzlIft gful/s /fi6«sf] d]?b08 x'g\. lzIffsf] dfWodaf6 dfq b]z ;d'Ggt, ;'Jojl:yt / ;';+:s[t aGg ;S5. To;}n], xfd|f ;a} gLlt tyf of]hgfx¿ lzIffsf] k|j4{gdf s]lG›t x'g'k5{."
+    "lzIffsf] cefjdf ;dfh cGof]nu|:t x'G5. clzlIft ;d'bfodf cGwljZjf;, b'/frf/, s'/Llt tyf s'k|yfx¿ JofKt x'G5g\\. lzlIft ;dfhdf g}lts d\"Nox¿, ;lxi0f'tf, ;dfj]zL b[li6sf]0f / ;dfgtf k|j4{g x'G5. lzIffn] JolQmnfO{ g}ltstf, pQ/bfloTj tyf gful/s st{Joaf/] ;r]t agfpF5.",
+    "cfhsf] l8lh6n o'udf lzIffn] k|ljlw;Fu xft]dfnf] ub{} cufl8 a9\\g' cfjZos 5. k|ljlwsf] k|efjzfnL pkof]un] lzIffnfO{ ;xh, cfsif{s / k|efjsf/L agfpF5. cgnfOg lzIff, s[lqd a'l4dQf, l8lh6n sIff cflbn] cfw'lgs lzIffdf qmflGt NofPsf 5g\\. t/, k|ljlwsf] c;Lldt k|of]un] dflg;nfO{ cfn:o, k/lge{/tf / ;fdflhs cnufjsf] cj:yfdf k'¥ofpg] vt/f klg /xG5.",
+    ";du|df, lzIff Ps cd\"No ;DklQ xf] h;n] JolQmnfO{ cfTdlge{/, ;Ifd / hfu¿s agfpF5. lzlIft gful/s /fi6«sf] d]?b08 x'g\\. lzIffsf] dfWodaf6 dfq b]z ;d'Ggt, ;'Jojl:yt / ;';+:s[t aGg ;S5. To;}n], xfd|f ;a} gLlt tyf of]hgfx¿ lzIffsf] k|j4{gdf s]lG›t x'g'k5{."
   ]
 };
