@@ -1,4 +1,3 @@
-
 // Text samples for typing tests in Unicode, Preeti and English formats
 
 interface TextEntry {
@@ -116,10 +115,40 @@ export const textSamples: TextEntry[] = [
   }
 ];
 
+// English text samples for the English typing test
+export const englishTextSamples: string[] = [
+  "The quick brown fox jumps over the lazy dog. This pangram contains all the letters of the English alphabet.",
+  "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
+  "The greatest glory in living lies not in never falling, but in rising every time we fall. - Nelson Mandela",
+  "Life is what happens when you're busy making other plans. - John Lennon",
+  "The way to get started is to quit talking and begin doing. - Walt Disney",
+  "Your time is limited, so don't waste it living someone else's life. - Steve Jobs",
+  "If life were predictable it would cease to be life, and be without flavor. - Eleanor Roosevelt",
+  "If you look at what you have in life, you'll always have more. If you look at what you don't have in life, you'll never have enough. - Oprah Winfrey",
+  "If you set your goals ridiculously high and it's a failure, you will fail above everyone else's success. - James Cameron",
+  "Many of life's failures are people who did not realize how close they were to success when they gave up. - Thomas A. Edison",
+  "Spread love everywhere you go. Let no one ever come to you without leaving happier. - Mother Teresa",
+  "When you reach the end of your rope, tie a knot in it and hang on. - Franklin D. Roosevelt",
+  "Always remember that you are absolutely unique. Just like everyone else. - Margaret Mead",
+  "Don't judge each day by the harvest you reap but by the seeds that you plant. - Robert Louis Stevenson",
+  "The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt",
+  "Tell me and I forget. Teach me and I remember. Involve me and I learn. - Benjamin Franklin",
+  "The best and most beautiful things in the world cannot be seen or even touched — they must be felt with the heart. - Helen Keller",
+  "It is during our darkest moments that we must focus to see the light. - Aristotle",
+  "Whoever is happy will make others happy too. - Anne Frank",
+  "Do not go where the path may lead, go instead where there is no path and leave a trail. - Ralph Waldo Emerson"
+];
+
 // Get a random text sample
 export const getRandomText = (): TextEntry => {
   const randomIndex = Math.floor(Math.random() * textSamples.length);
   return textSamples[randomIndex];
+};
+
+// Get a random English text sample
+export const getRandomEnglishText = (): string => {
+  const randomIndex = Math.floor(Math.random() * englishTextSamples.length);
+  return englishTextSamples[randomIndex];
 };
 
 // Get all text samples
@@ -138,9 +167,9 @@ export const educationText = {
     "समग्रमा, शिक्षा एक अमूल्य सम्पत्ति हो जसले व्यक्तिलाई आत्मनिर्भर, सक्षम र जागरूक बनाउँछ। शिक्षित नागरिक राष्ट्रको मेरुदण्ड हुन्। शिक्षाको माध्यमबाट मात्र देश समुन्नत, सुव्यवस्थित र सुसंस्कृत बन्न सक्छ। त्यसैले, हाम्रा सबै नीति तथा योजनाहरू शिक्षाको प्रवर्द्धनमा केन्द्रित हुनुपर्छ।"
   ],
   preeti: [
-    "lzIff dfgj ;Eotfsf] d]?b08 xf]. of] ;dfhsf] pGglt, ;d[l4 / ;f+:s[lts ;+/If0fsf] nflu dxTTjk\"0f{ tTj xf]. lzIffn] JolQm dfq geO{ ;du| /fi6«nfO{ dfu{bz{g u5{. s'g} klg b]zsf] pGglt lzIffsf] :t/df lge{/ ub{5. 1fgsf] ulx/fOdf k'Ugsf nflu lzIff clgjfo{ 5.",
-    "lzIff JolQmsf] af}l4s Ifdtf clej[l4 ug{] dfWod xf]. lzIffn] tfls{s ;f]rfOnfO{ k|v/ agfpF5 / ljZn]if0ffTds b[li6sf]0f ljsl;t u5{. Jofjxfl/s hLjgdf sl7g kl/l:ylt ;dfwfg ug{ lzIffn] d'Vo e\"ldsf v]Nb5. pbfx/0f:j¿k, j}1flgs cg';Gwfgx¿, k|ljlwsf] ljsf;, cf}Bf]lus qmflGt cflbsf] d\"n cfwf/ g} lzIff xf].",
-    "lzIffsf] cefjdf ;dfh cGof]nu|:t x'G5. clzlIft ;d'bfodf cGwljZjf;, b'/frf/, s'/Llt tyf s'k|yfx¿ JofKt x'G5g\\. lzlIft ;dfhdf g}lts d\"Nox¿, ;lxi0f'tf, ;dfj]zL b[li6sf]0f / ;dfgtf k|j4{g x'G5. lzIffn] JolQmnfO{ g}ltstf, pQ/bfloTj tyf gful/s st{Joaf/] ;r]t agfpF5.",
+    "lzIff dfgj ;Eotfsf] d]?b08 xf]. of] ;dfhsf] pGglt, ;d[l4 / ;f+:s[lts ;+/If0fsf] nflu dxTjk\"0f{ tTj xf]. lzIffn] JolQm dfq geO{ ;du| /fi6«nfO{ dfu{bz{g u5{. s'g} klg b]zsf] pGglt lzIffsf] :t/df lge{/ ub{5. 1fgsf] ulx/fOdf k'Ugsf nflu lzIff clgjfo{ 5.",
+    "lzIff JolQmsf] af}l4s Ifdtf clej[l4 ug{] dfWod xf]. lzIffn] tfls{s ;f]rfOnfO{ k|v/ agfpF5 / ljZn]if0ffTds b[li6sf]0f ljsl;t u5{. Jofjxfl/s hLjgdf sl7g kl/l:ylt ;dfwfg ug{ lzIffn] d'Vo e\"ldsf v]N5. pbfx/0f:j¿k, j}1flgs cg';Gwfgx¿, k|ljlwsf] ljsf;, cf}Bf]lus qmflGt cflbsf] d\"n cfwf/ g} lzIff xf].",
+    "lzIffsf] cefjdf ;dfh cGof]nu|:t x'G5. clzlIft ;d'bfodf cGwljZjf;, b'/frf/, s'/Llt tyf s'k|yfx¿ JofKt x'G5g\. lzlIft ;dfhdf g}lts d\"Nox¿, ;lxi0f'tf, ;dfj]zL b[li6sf]0f / ;dfgtf k|j4{g x'G5. lzIffn] JolQmnfO{ g}ltstf, pQ/bfloTj tyf gful/s st{Joaf/] ;r]t agfpF5.",
     "cfhsf] l8lh6n o'udf lzIffn] k|ljlw;Fu xft]dfnf] ub{} cufl8 a9\\g' cfjZos 5. k|ljlwsf] k|efjzfnL pkof]un] lzIffnfO{ ;xh, cfsif{s / k|efjsf/L agfpF5. cgnfOg lzIff, s[lqd a'l4dQf, l8lh6n sIff cflbn] cfw'lgs lzIffdf qmflGt NofPsf 5g\\. t/, k|ljlwsf] c;Lldt k|of]un] dflg;nfO{ cfn:o, k/lge{/tf / ;fdflhs cnufjsf] cj:yfdf k'¥ofpg] vt/f klg /xG5.",
     ";du|df, lzIff Ps cd\"No ;DklQ xf] h;n] JolQmnfO{ cfTdlge{/, ;Ifd / hfu¿s agfpF5. lzlIft gful/s /fi6«sf] d]?b08 x'g\\. lzIffsf] dfWodaf6 dfq b]z ;d'Ggt, ;'Jojl:yt / ;';+:s[t aGg ;S5. To;}n], xfd|f ;a} gLlt tyf of]hgfx¿ lzIffsf] k|j4{gdf s]lG›t x'g'k5{."
   ]

@@ -4,166 +4,202 @@ import { motion } from 'framer-motion';
 import { preetiToUnicode } from '@/utils/preetiToUnicode';
 import { unicodeToPreeti } from '@/utils/unicodeToPreeti';
 import { romanToNepaliUnicode } from '@/utils/romanToNepaliUnicode';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
-import { Copy, Check, RotateCw, ArrowRightLeft, Highlighter } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Clipboard, Check, RefreshCcw } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+
+enum ConversionMode {
+  PREETI_TO_UNICODE = 'preeti-to-unicode',
+  UNICODE_TO_PREETI = 'unicode-to-preeti',
+  ROMAN_TO_UNICODE = 'roman-to-unicode'
+}
 
 const Converter: React.FC = () => {
-  const [inputText, setInputText] = useState('');
-  const [outputText, setOutputText] = useState('');
-  const [conversionType, setConversionType] = useState<'preetiToUnicode' | 'unicodeToPreeti' | 'romanToUnicode'>('preetiToUnicode');
-  const [copied, setCopied] = useState(false);
-
-  // Update the output text when the input or conversion type changes
+  const [inputText, setInputText] = useState<string>('');
+  const [outputText, setOutputText] = useState<string>('');
+  const [mode, setMode] = useState<ConversionMode>(ConversionMode.PREETI_TO_UNICODE);
+  const [copied, setCopied] = useState<boolean>(false);
+  const { toast } = useToast();
+  
   useEffect(() => {
-    convertText();
-  }, [inputText, conversionType]);
-
-  const convertText = () => {
-    if (!inputText) {
-      setOutputText('');
-      return;
-    }
-
-    try {
-      switch (conversionType) {
-        case 'preetiToUnicode':
-          setOutputText(preetiToUnicode(inputText));
-          break;
-        case 'unicodeToPreeti':
-          setOutputText(unicodeToPreeti(inputText));
-          break;
-        case 'romanToUnicode':
-          setOutputText(romanToNepaliUnicode(inputText));
-          break;
+    if (inputText) {
+      try {
+        switch (mode) {
+          case ConversionMode.PREETI_TO_UNICODE:
+            setOutputText(preetiToUnicode(inputText));
+            break;
+          case ConversionMode.UNICODE_TO_PREETI:
+            setOutputText(unicodeToPreeti(inputText));
+            break;
+          case ConversionMode.ROMAN_TO_UNICODE:
+            setOutputText(romanToNepaliUnicode(inputText));
+            break;
+        }
+      } catch (err) {
+        console.error("Error in conversion:", err);
+        setOutputText('Error in conversion. Please check your input.');
       }
-    } catch (error) {
-      console.error('Conversion error:', error);
-      setOutputText('Error in conversion');
+    } else {
+      setOutputText('');
+    }
+  }, [inputText, mode]);
+  
+  const handleCopy = () => {
+    if (outputText) {
+      navigator.clipboard.writeText(outputText)
+        .then(() => {
+          setCopied(true);
+          toast({
+            title: "Copied!",
+            description: "Text copied to clipboard",
+            duration: 2000
+          });
+          setTimeout(() => setCopied(false), 2000);
+        })
+        .catch(err => {
+          console.error('Failed to copy text: ', err);
+          toast({
+            title: "Error",
+            description: "Failed to copy text",
+            variant: "destructive"
+          });
+        });
     }
   };
 
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(outputText);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy text:', err);
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setInputText(e.target.value);
+  const handleClear = () => {
+    setInputText('');
+    setOutputText('');
   };
 
   return (
     <div className="w-full max-w-screen-lg mx-auto px-4 py-6">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        className="bg-gray-800 rounded-xl shadow-lg overflow-hidden"
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="bg-gray-800 dark:bg-gray-800 rounded-2xl shadow-2xl p-6 border border-gray-700"
       >
-        <h2 className="text-xl md:text-2xl font-semibold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
-          <ArrowRightLeft className="inline-block mr-2 mb-1" size={24} />
-          Nepali Text Converter
-        </h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <Button
-            onClick={() => setConversionType('preetiToUnicode')}
-            className={`px-4 py-2 flex items-center justify-center gap-2 rounded-xl ${
-              conversionType === 'preetiToUnicode' 
-                ? 'gradient-purple shadow-lg shadow-purple-500/20' 
-                : 'bg-gray-700 hover:bg-gray-600'
-            } button-hover-effect`}
-          >
-            <RotateCw size={16} className={conversionType === 'preetiToUnicode' ? 'animate-spin-slow' : ''} />
-            Preeti to Unicode
-          </Button>
-          <Button
-            onClick={() => setConversionType('unicodeToPreeti')}
-            className={`px-4 py-2 flex items-center justify-center gap-2 rounded-xl ${
-              conversionType === 'unicodeToPreeti' 
-                ? 'gradient-blue shadow-lg shadow-blue-500/20' 
-                : 'bg-gray-700 hover:bg-gray-600'
-            } button-hover-effect`}
-          >
-            <RotateCw size={16} className={conversionType === 'unicodeToPreeti' ? 'animate-spin-slow' : ''} />
-            Unicode to Preeti
-          </Button>
-          <Button
-            onClick={() => setConversionType('romanToUnicode')}
-            className={`px-4 py-2 flex items-center justify-center gap-2 rounded-xl ${
-              conversionType === 'romanToUnicode' 
-                ? 'gradient-purple shadow-lg shadow-purple-500/20' 
-                : 'bg-gray-700 hover:bg-gray-600'
-            } button-hover-effect`}
-          >
-            <RotateCw size={16} className={conversionType === 'romanToUnicode' ? 'animate-spin-slow' : ''} />
-            Roman to Unicode
-          </Button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-400 flex items-center gap-2">
-              <Highlighter size={16} />
-              {conversionType === 'preetiToUnicode' ? 'Preeti Text' : 
-               conversionType === 'unicodeToPreeti' ? 'Unicode Text' : 'Roman Text'}
-            </label>
-            <textarea
-              value={inputText}
-              onChange={handleInputChange}
-              className={`w-full h-48 p-4 rounded-xl bg-gray-900 text-white border border-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200 ${
-                conversionType === 'preetiToUnicode' ? 'font-preeti' : ''
+        <div className="p-6">
+          <h2 className="text-2xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
+            नेपाली टेक्स्ट रूपान्तरण
+          </h2>
+          
+          {/* Conversion Mode Selector */}
+          <div className="flex flex-wrap justify-center gap-3 mb-6">
+            <Button
+              variant={mode === ConversionMode.PREETI_TO_UNICODE ? "default" : "outline"}
+              onClick={() => setMode(ConversionMode.PREETI_TO_UNICODE)}
+              className={`rounded-full px-4 py-2 ${
+                mode === ConversionMode.PREETI_TO_UNICODE ? 'gradient-purple text-white shadow-md' : ''
               }`}
-              placeholder={`Enter ${
-                conversionType === 'preetiToUnicode' ? 'Preeti' : 
-                conversionType === 'unicodeToPreeti' ? 'Unicode' : 'Roman'
-              } text here...`}
-            />
+            >
+              Preeti → Unicode
+            </Button>
+            <Button
+              variant={mode === ConversionMode.UNICODE_TO_PREETI ? "default" : "outline"}
+              onClick={() => setMode(ConversionMode.UNICODE_TO_PREETI)}
+              className={`rounded-full px-4 py-2 ${
+                mode === ConversionMode.UNICODE_TO_PREETI ? 'gradient-blue text-white shadow-md' : ''
+              }`}
+            >
+              Unicode → Preeti
+            </Button>
+            <Button
+              variant={mode === ConversionMode.ROMAN_TO_UNICODE ? "default" : "outline"}
+              onClick={() => setMode(ConversionMode.ROMAN_TO_UNICODE)}
+              className={`rounded-full px-4 py-2 ${
+                mode === ConversionMode.ROMAN_TO_UNICODE ? 'gradient-purple text-white shadow-md' : ''
+              }`}
+            >
+              Roman → नेपाली
+            </Button>
           </div>
-
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <label className="block text-sm font-medium text-gray-400 flex items-center gap-2">
-                <Highlighter size={16} />
-                {conversionType === 'preetiToUnicode' ? 'Unicode Text' : 
-                conversionType === 'unicodeToPreeti' ? 'Preeti Text' : 'Unicode Nepali Text'}
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Input Box */}
+            <div className="space-y-2">
+              <label htmlFor="inputText" className="block text-sm font-medium text-gray-400">
+                {mode === ConversionMode.PREETI_TO_UNICODE && "Preeti Text"}
+                {mode === ConversionMode.UNICODE_TO_PREETI && "Unicode Nepali"}
+                {mode === ConversionMode.ROMAN_TO_UNICODE && "Roman Text"}
               </label>
-              <Button
-                onClick={copyToClipboard}
-                variant="ghost"
-                size="sm"
-                className="text-gray-400 hover:text-white button-hover-effect"
-                disabled={!outputText}
-              >
-                {copied ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
-                <span className="ml-1">{copied ? 'Copied!' : 'Copy'}</span>
-              </Button>
+              <textarea
+                id="inputText"
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                className={`w-full h-60 p-4 bg-gray-900 text-white rounded-lg border border-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent ${
+                  mode === ConversionMode.PREETI_TO_UNICODE ? 'font-preeti text-lg' : ''
+                }`}
+                placeholder={
+                  mode === ConversionMode.PREETI_TO_UNICODE 
+                    ? "Paste Preeti text here..." 
+                    : mode === ConversionMode.UNICODE_TO_PREETI 
+                    ? "Paste Unicode Nepali text here..." 
+                    : "Type Roman text (e.g., namaste)..."
+                }
+              />
             </div>
-            <textarea
-              value={outputText}
-              readOnly
-              className={`w-full h-48 p-4 rounded-xl bg-gray-900 text-white border border-gray-700 ${
-                conversionType === 'unicodeToPreeti' ? 'font-preeti' : ''
-              }`}
-              placeholder="Converted text will appear here..."
-            />
+            
+            {/* Output Box */}
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <label htmlFor="outputText" className="block text-sm font-medium text-gray-400">
+                  {mode === ConversionMode.PREETI_TO_UNICODE && "Unicode Nepali"}
+                  {mode === ConversionMode.UNICODE_TO_PREETI && "Preeti Text"}
+                  {mode === ConversionMode.ROMAN_TO_UNICODE && "नेपाली Unicode"}
+                </label>
+                <div className="flex space-x-2">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={handleClear} 
+                    disabled={!inputText}
+                    className="text-gray-400 hover:text-white"
+                  >
+                    <RefreshCcw size={16} />
+                    <span className="ml-1">Clear</span>
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={handleCopy} 
+                    disabled={!outputText}
+                    className="text-gray-400 hover:text-white"
+                  >
+                    {copied ? <Check size={16} /> : <Clipboard size={16} />}
+                    <span className="ml-1">{copied ? "Copied" : "Copy"}</span>
+                  </Button>
+                </div>
+              </div>
+              <div 
+                id="outputText" 
+                className={`w-full h-60 p-4 bg-gray-900 text-white rounded-lg border border-gray-700 overflow-auto ${
+                  mode === ConversionMode.UNICODE_TO_PREETI ? 'font-preeti text-xl leading-relaxed' : ''
+                }`}
+              >
+                {outputText || (
+                  <span className="text-gray-500 italic">
+                    {mode === ConversionMode.PREETI_TO_UNICODE 
+                      ? "Unicode Nepali text will appear here..." 
+                      : mode === ConversionMode.UNICODE_TO_PREETI 
+                      ? "Preeti text will appear here..." 
+                      : "Nepali text will appear here..."}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-6 text-sm text-center text-gray-500">
+            <p>
+              {mode === ConversionMode.PREETI_TO_UNICODE && "Convert traditional Preeti font text to modern Unicode Nepali."}
+              {mode === ConversionMode.UNICODE_TO_PREETI && "Convert Unicode Nepali to traditional Preeti font text."}
+              {mode === ConversionMode.ROMAN_TO_UNICODE && "Type in English and convert to Nepali Unicode. Example: 'namaste' → 'नमस्ते'"}
+            </p>
           </div>
         </div>
       </motion.div>
-
-      <div className="mt-8 text-gray-500 text-sm bg-gray-800 p-4 rounded-xl border border-gray-700">
-        <p className="mb-2 font-medium text-gray-400">Conversion Notes:</p>
-        <ul className="list-disc list-inside space-y-1 ml-2">
-          <li>Preeti to Unicode: Converts text from Preeti font format to Unicode Nepali.</li>
-          <li>Unicode to Preeti: Converts Unicode Nepali text to Preeti font format.</li>
-          <li>Roman to Unicode: Converts Roman transliteration to Unicode Nepali.</li>
-        </ul>
-      </div>
     </div>
   );
 };
