@@ -41,7 +41,7 @@ const Converter: React.FC = () => {
   
   const detectTextType = (text: string): ConversionMode => {
     const preetiPattern = /[cfOkmaevnz;xsI]/;
-    const preetiSpecificCombos = /(cf]|O{|pm|kf|df|]/;
+    const preetiSpecificCombos = /(cf]|O{|pm|kf|df)/;
     const unicodePattern = /[\u0900-\u097F]/;
     const romanPattern = /^[a-zA-Z0-9\s,.?!-]+$/;
     
