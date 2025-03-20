@@ -1,8 +1,8 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { preetiToUnicode } from '@/utils/preetiToUnicode';
 import { unicodeToPreeti } from '@/utils/unicodeToPreeti';
-import { romanToNepaliUnicode } from '@/utils/romanToNepaliUnicode';
 import { Button } from '@/components/ui/button';
 import { Clipboard, Check, RefreshCcw, Sparkles, AlertTriangle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -12,7 +12,6 @@ import { Textarea } from '@/components/ui/textarea';
 enum ConversionMode {
   PREETI_TO_UNICODE = 'preeti-to-unicode',
   UNICODE_TO_PREETI = 'unicode-to-preeti',
-  ROMAN_TO_UNICODE = 'roman-to-unicode',
   AUTO_DETECT = 'auto-detect'
 }
 
@@ -43,17 +42,14 @@ const Converter: React.FC = () => {
     const preetiPattern = /[cfOkmaevnz;xsI]/;
     const preetiSpecificCombos = /(cf]|O{|pm|kf|df)/;
     const unicodePattern = /[\u0900-\u097F]/;
-    const romanPattern = /^[a-zA-Z0-9\s,.?!-]+$/;
     
     if (preetiPattern.test(text) && preetiSpecificCombos.test(text) && !unicodePattern.test(text)) {
       return ConversionMode.PREETI_TO_UNICODE;
     } else if (unicodePattern.test(text)) {
       return ConversionMode.UNICODE_TO_PREETI;
-    } else if (romanPattern.test(text)) {
-      return ConversionMode.ROMAN_TO_UNICODE;
     }
     
-    return ConversionMode.ROMAN_TO_UNICODE;
+    return ConversionMode.PREETI_TO_UNICODE; // Default to Preeti to Unicode
   };
   
   const convertText = (text: string, conversionMode: ConversionMode) => {
@@ -69,10 +65,15 @@ const Converter: React.FC = () => {
           result = unicodeToPreeti(text);
           setSuggestions([]);
           break;
-        case ConversionMode.ROMAN_TO_UNICODE:
         case ConversionMode.AUTO_DETECT:
-          result = romanToNepaliUnicode(text);
-          generateRomanSuggestions(text);
+          // Auto-detect now only switches between Preeti and Unicode
+          if (detectTextType(text) === ConversionMode.PREETI_TO_UNICODE) {
+            result = preetiToUnicode(text);
+            generatePreetiSuggestions(text);
+          } else {
+            result = unicodeToPreeti(text);
+            setSuggestions([]);
+          }
           break;
       }
       
@@ -94,30 +95,6 @@ const Converter: React.FC = () => {
     if (text.includes('ff')) {
       suggestions.push('Tip: Double "ff" is uncommon in Preeti, check your typing');
     }
-    
-    setSuggestions(suggestions);
-  };
-  
-  const generateRomanSuggestions = (text: string) => {
-    const commonRomanWords: Record<string, string> = {
-      'namaste': 'नमस्ते',
-      'nepal': 'नेपाल',
-      'kathmandu': 'काठमाडौं',
-      'dhanyabad': 'धन्यवाद',
-      'tapai': 'तपाईं',
-      'ma': 'म',
-      'hamro': 'हाम्रो',
-      'ramro': 'राम्रो',
-    };
-    
-    const suggestions: string[] = [];
-    const words = text.toLowerCase().split(/\s+/);
-    
-    words.forEach(word => {
-      if (commonRomanWords[word]) {
-        suggestions.push(`"${word}" → "${commonRomanWords[word]}"`);
-      }
-    });
     
     setSuggestions(suggestions);
   };
@@ -149,44 +126,6 @@ const Converter: React.FC = () => {
     setInputText('');
     setOutputText('');
     setSuggestions([]);
-  };
-
-  const applySuggestion = (suggestionText: string) => {
-    const match = suggestionText.match(/→\s*"([^"]+)"/);
-    if (match && match[1]) {
-      const nepaliWord = match[1];
-      
-      if (mode === ConversionMode.ROMAN_TO_UNICODE || 
-          (mode === ConversionMode.AUTO_DETECT && detectedMode === ConversionMode.ROMAN_TO_UNICODE)) {
-        setOutputText(prev => {
-          const inputWords = inputText.toLowerCase().split(/\s+/);
-          const outputWords = prev.split(/\s+/);
-          
-          if (inputWords.length === outputWords.length) {
-            for (let i = 0; i < inputWords.length; i++) {
-              if (commonRomanWords[inputWords[i]]) {
-                outputWords[i] = nepaliWord;
-                break;
-              }
-            }
-            return outputWords.join(' ');
-          }
-          
-          return prev ? `${prev} ${nepaliWord}` : nepaliWord;
-        });
-      }
-    }
-  };
-
-  const commonRomanWords: Record<string, string> = {
-    'namaste': 'नमस्ते',
-    'nepal': 'नेपाल',
-    'kathmandu': 'काठमाडौं',
-    'dhanyabad': 'धन्यवाद',
-    'tapai': 'तपाईं',
-    'ma': 'म',
-    'hamro': 'हाम्रो',
-    'ramro': 'राम्रो',
   };
 
   return (
@@ -231,15 +170,6 @@ const Converter: React.FC = () => {
             >
               Unicode → Preeti
             </Button>
-            <Button
-              variant={mode === ConversionMode.ROMAN_TO_UNICODE ? "default" : "outline"}
-              onClick={() => setMode(ConversionMode.ROMAN_TO_UNICODE)}
-              className={`rounded-full px-4 py-2 ${
-                mode === ConversionMode.ROMAN_TO_UNICODE ? 'gradient-purple text-white shadow-md' : ''
-              }`}
-            >
-              Roman → नेपाली
-            </Button>
           </div>
           
           {mode === ConversionMode.AUTO_DETECT && detectedMode && inputText && (
@@ -249,7 +179,7 @@ const Converter: React.FC = () => {
                 Detected: {
                   detectedMode === ConversionMode.PREETI_TO_UNICODE ? 'Preeti Text' :
                   detectedMode === ConversionMode.UNICODE_TO_PREETI ? 'Unicode Nepali' :
-                  'Roman Text'
+                  'Preeti Text' // Default to Preeti Text
                 }
               </span>
             </div>
@@ -260,8 +190,7 @@ const Converter: React.FC = () => {
               <label htmlFor="inputText" className="block text-sm font-medium text-gray-400">
                 {mode === ConversionMode.PREETI_TO_UNICODE && "Preeti Text"}
                 {mode === ConversionMode.UNICODE_TO_PREETI && "Unicode Nepali"}
-                {mode === ConversionMode.ROMAN_TO_UNICODE && "Roman Text"}
-                {mode === ConversionMode.AUTO_DETECT && "Input Text (Any Format)"}
+                {mode === ConversionMode.AUTO_DETECT && "Input Text (Auto-Detect)"}
               </label>
               <Textarea
                 id="inputText"
@@ -274,12 +203,10 @@ const Converter: React.FC = () => {
                 }`}
                 placeholder={
                   mode === ConversionMode.AUTO_DETECT 
-                    ? "Type or paste text in any format (Preeti, Unicode, or Roman)..." 
+                    ? "Type or paste text (Preeti or Unicode)..." 
                     : mode === ConversionMode.PREETI_TO_UNICODE 
                     ? "Paste Preeti text here..." 
-                    : mode === ConversionMode.UNICODE_TO_PREETI 
-                    ? "Paste Unicode Nepali text here..." 
-                    : "Type Roman text (e.g., namaste)..."
+                    : "Paste Unicode Nepali text here..."
                 }
               />
             </div>
@@ -290,10 +217,7 @@ const Converter: React.FC = () => {
                   {mode === ConversionMode.PREETI_TO_UNICODE || 
                    (mode === ConversionMode.AUTO_DETECT && detectedMode === ConversionMode.PREETI_TO_UNICODE) 
                     ? "Unicode Nepali" 
-                    : mode === ConversionMode.UNICODE_TO_PREETI || 
-                      (mode === ConversionMode.AUTO_DETECT && detectedMode === ConversionMode.UNICODE_TO_PREETI) 
-                    ? "Preeti Text" 
-                    : "नेपाली Unicode"}
+                    : "Preeti Text"}
                 </label>
                 <div className="flex space-x-2">
                   <Button 
@@ -332,9 +256,7 @@ const Converter: React.FC = () => {
                       ? "Converted text will appear here..." 
                       : mode === ConversionMode.PREETI_TO_UNICODE 
                       ? "Unicode Nepali text will appear here..." 
-                      : mode === ConversionMode.UNICODE_TO_PREETI 
-                      ? "Preeti text will appear here..." 
-                      : "Nepali text will appear here..."}
+                      : "Preeti text will appear here..."}
                   </span>
                 )}
               </div>
@@ -354,7 +276,6 @@ const Converter: React.FC = () => {
                     variant="outline"
                     size="sm"
                     className="bg-gray-800 border-amber-600/30 hover:bg-amber-900/30 text-amber-300 text-xs"
-                    onClick={() => applySuggestion(suggestion)}
                   >
                     {suggestion}
                   </Button>
@@ -366,12 +287,10 @@ const Converter: React.FC = () => {
           <div className="mt-6 text-sm text-center text-gray-500">
             <p>
               {mode === ConversionMode.AUTO_DETECT 
-                ? "Smart detection automatically identifies and converts Preeti, Unicode, or Roman text." 
+                ? "Smart detection automatically identifies and converts between Preeti and Unicode formats." 
                 : mode === ConversionMode.PREETI_TO_UNICODE 
                 ? "Convert traditional Preeti font text to modern Unicode Nepali." 
-                : mode === ConversionMode.UNICODE_TO_PREETI 
-                ? "Convert Unicode Nepali to traditional Preeti font text." 
-                : "Type in English and convert to Nepali Unicode. Example: 'namaste' → 'नमस्ते'"}
+                : "Convert Unicode Nepali to traditional Preeti font text."}
             </p>
           </div>
         </div>
