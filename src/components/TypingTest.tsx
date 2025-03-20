@@ -1,11 +1,12 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { getRandomText } from '@/utils/textSamples';
+import { getRandomText, getRandomLongText, getRandomExtendedText } from '@/utils/textSamples';
 import { calculateWPM, calculateAccuracy, processUserInput, formatTime } from '@/utils/typingUtils';
 import { cn } from '@/lib/utils';
 import Stats from './Stats';
 import { preetiToUnicode } from '@/utils/preetiToUnicode';
+import { Clock, BookOpen, RefreshCw } from 'lucide-react';
 
 interface TypingTestProps {
   className?: string;
@@ -23,6 +24,9 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
   
   // Live Nepali conversion preview
   const [liveNepaliPreview, setLiveNepaliPreview] = useState<string>('');
+  
+  // Text mode (short, long practice)
+  const [textMode, setTextMode] = useState<'short' | 'long' | 'extended'>('short');
   
   // Timer state
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
@@ -50,8 +54,14 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     setAccuracy(100);
     setLiveNepaliPreview('');
     
-    // Get a new random text sample
-    setCurrentText(getRandomText());
+    // Get a new random text sample based on the selected mode
+    if (textMode === 'long') {
+      setCurrentText(getRandomLongText());
+    } else if (textMode === 'extended') {
+      setCurrentText(getRandomExtendedText());
+    } else {
+      setCurrentText(getRandomText());
+    }
     
     // Clear any existing timer
     if (timerIntervalRef.current) {
@@ -63,7 +73,13 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  }, []);
+  }, [textMode]);
+  
+  // Change text mode and reload
+  const changeTextMode = (mode: 'short' | 'long' | 'extended') => {
+    setTextMode(mode);
+    // This will trigger the useEffect to reload with new text type
+  };
   
   // Start the timer when test becomes active
   const startTimer = useCallback(() => {
@@ -117,7 +133,16 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     // Small delay before showing the next text
     setTimeout(() => {
       setUserInput('');
-      setCurrentText(getRandomText());
+      
+      // Get next text based on mode
+      if (textMode === 'long') {
+        setCurrentText(getRandomLongText());
+      } else if (textMode === 'extended') {
+        setCurrentText(getRandomExtendedText());
+      } else {
+        setCurrentText(getRandomText());
+      }
+      
       setLiveNepaliPreview('');
     }, 500);
   };
@@ -135,7 +160,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
     }
   };
   
-  // Start a new test on component mount
+  // Start a new test on component mount or text mode change
   useEffect(() => {
     startNewTest();
     
@@ -145,7 +170,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
         clearInterval(timerIntervalRef.current);
       }
     };
-  }, [startNewTest]);
+  }, [startNewTest, textMode]);
   
   // Get the current target texts
   const unicodeText = currentText.unicode;
@@ -179,12 +204,45 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
 
   return (
     <div className={cn("w-full max-w-screen-lg mx-auto px-4 typing-test-container", className)}>
-      <div className="mb-8">
+      <div className="mb-6">
         <Stats 
           wpm={wpm} 
           accuracy={accuracy} 
           time={formatTime(timeElapsed)} 
         />
+      </div>
+      
+      <div className="mb-6 flex justify-center flex-wrap gap-2">
+        <button
+          onClick={() => changeTextMode('short')}
+          className={`px-4 py-2 rounded-full flex items-center gap-2 transition-all ${
+            textMode === 'short' 
+              ? 'bg-primary text-white' 
+              : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+          }`}
+        >
+          <RefreshCw size={16} /> Short Text
+        </button>
+        <button
+          onClick={() => changeTextMode('long')}
+          className={`px-4 py-2 rounded-full flex items-center gap-2 transition-all ${
+            textMode === 'long' 
+              ? 'bg-primary text-white' 
+              : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+          }`}
+        >
+          <BookOpen size={16} /> 200+ Words
+        </button>
+        <button
+          onClick={() => changeTextMode('extended')}
+          className={`px-4 py-2 rounded-full flex items-center gap-2 transition-all ${
+            textMode === 'extended' 
+              ? 'bg-primary text-white' 
+              : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+          }`}
+        >
+          <Clock size={16} /> Extended Practice
+        </button>
       </div>
       
       {showFinalScore ? (
@@ -225,7 +283,9 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
         >
           <div className="flex justify-between items-center mb-4">
             <span className="text-gray-400 dark:text-gray-400 text-sm">
-              Nepali Typing Practice
+              {textMode === 'short' ? 'Short Text Practice' : 
+               textMode === 'long' ? '200+ Words Long Text Practice' : 
+               'Extended Practice (1000+ Texts)'}
             </span>
           </div>
           
@@ -233,7 +293,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
             {/* Unicode Format */}
             <div className="space-y-2">
               <h3 className="text-gray-300 mb-2 text-left">Unicode (नेपाली):</h3>
-              <div className="text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px]">
+              <div className="text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px] text-left overflow-y-auto max-h-[300px] scrollbar-thin scrollbar-thumb-gray-600">
                 {renderText(unicodeText, false)}
                 <span className="inline-block w-0.5 h-5 bg-primary ml-0.5 animate-caret-blink"></span>
               </div>
@@ -242,7 +302,7 @@ const TypingTest: React.FC<TypingTestProps> = ({ className }) => {
             {/* Preeti Format */}
             <div className="space-y-2">
               <h3 className="text-gray-300 mb-2 text-left">Preeti:</h3>
-              <div className="text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px] font-mono">
+              <div className="text-lg md:text-2xl leading-relaxed tracking-wide text-gray-400 dark:text-gray-400 mb-4 min-h-[120px] font-mono text-left overflow-y-auto max-h-[300px] scrollbar-thin scrollbar-thumb-gray-600">
                 {renderText(preetiText, true)}
               </div>
             </div>
