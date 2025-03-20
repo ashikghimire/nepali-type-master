@@ -1,3 +1,4 @@
+
 // Text samples for typing tests in Unicode, Preeti and English formats
 
 interface TextEntry {
@@ -152,6 +153,25 @@ export const extendedTextSamples: TextEntry[] = [
   })))
 ];
 
+// Educational text for reference - used in specialized components
+const educationText = {
+  unicode: [
+    "शिक्षा मानव सभ्यताको मेरुदण्ड हो। यो समाजको उन्नति, समृद्धि र सांस्कृतिक संरक्षणको लागि महत्त्वपूर्ण तत्व हो। शिक्षाले व्यक्ति मात्र नभई समग्र राष्ट्रलाई मार्गदर्शन गर्छ। कुनै पनि देशको उन्नति शिक्षाको स्तरमा निर्भर गर्दछ। ज्ञानको गहिराइमा पुग्नका लागि शिक्षा अनिवार्य छ।",
+    "शिक्षा व्यक्तिको बौद्धिक क्षमता अभिवृद्धि गर्ने माध्यम हो। शिक्षाले तार्किक सोचाइ र विश्लेषणात्मक दृष्टिकोणको विकास गर्दछ। व्यावहारिक जीवनका कठिन परिस्थितिहरूको समाधानमा शिक्षाले महत्त्वपूर्ण भूमिका निभाउँछ। उदाहरणका लागि, वैज्ञानिक अनुसन्धान, प्रविधिक विकास, औद्योगिक क्रान्ति आदि सबै शिक्षामा आधारित छन्।",
+    "शिक्षाको अभावमा समाज दिग्भ्रमित हुन्छ। अशिक्षित समुदायमा अन्धविश्वास, कुरीति र कुप्रथाहरू हावी हुन्छन्। शिक्षित समाजमा नैतिक मूल्य, सहिष्णुता, समावेशी दृष्टिकोण र समानताको प्रवर्द्धन हुन्छ। शिक्षाले व्यक्तिलाई नैतिकता, जिम्मेवारी र नागरिक कर्तव्यप्रति सचेत गराउँछ।",
+    "आजको डिजिटल युगमा शिक्षाले प्रविधिसँग हातेमालो गरेर अघि बढ्नु आवश्यक छ। प्रविधिको प्रभावकारी प्रयोगले शिक्षालाई सरल, आकर्षक र प्रभावकारी बनाउँछ। अनलाइन शिक्षा, कृत्रिम बुद्धिमता, डिजिटल कक्षाकोठा आदिले आधुनिक शिक्षामा क्रान्ति ल्याएका छन्। तर प्रविधिको असीमित प्रयोगले आलस्यता, निर्भरता र सामाजिक एक्लोपनमा पनि पुर्‍याउन सक्छ।",
+    "समग्रमा, शिक्षा एक अमूल्य सम्पत्ति हो जसले व्यक्तिलाई आत्मनिर्भर, सक्षम र जागरुक बनाउँछ। शिक्षित नागरिक राष्ट्रको मेरुदण्ड हुन्। शिक्षाबाट मात्र देश समृद्ध, सुव्यवस्थित र संस्कृत बन्न सक्छ। त्यसैले हाम्रा सबै नीति र योजनाहरू शिक्षाको प्रवर्द्धनमा केन्द्रित हुनुपर्दछ।"
+  ],
+  preeti: [
+    "lzIff dfgj ;Eotfsf] d]?b08 xf] . of] ;dfhsf] pGglt, ;d[l4 / ;f+:s[lts ;+/If0fsf] nflu dxTTjk"0f{ tTj xf] . lzIffn] JolQm dfq geO{ ;du| /fi6«nfO{ dfu{bz{g u5{ . s'g} klg b]zsf] pGglt lzIffsf] :t/df lge{/ ub{5 . 1fgsf] ulx/fOdf k'Ugsf nflu lzIff clgjfo{ 5 .",
+    "lzIff JolQmsf] af}l4s Ifdtf clej[l4 ug]{ dfWod xf] . lzIffn] tfls{s ;f]rfO / ljZn]if0ffTds b[li6sf]0fsf] ljsf; ub{5 . Jofjxfl/s hLjgsf sl7g kl/l:yltx¿sf] ;dfwfgdf lzIffn] dxTTjk"0f{ e"ldsf lgjfpF5 . pbfx/0fsf nflu, j}1flgs cg';Gwfg, k|fljlws ljsf;, cf}Bf]lus qmflGt cflb ;a} lzIffdf cfwfl/t 5g\ .",
+    "lzIffsf] cefjdf ;dfh lbUe|ldt x'G5 . clzlIft ;d'bfodf cGwljZjf;, s'/Llt / s'k|yfx¿ xfjL x'G5g\ . lzlIft ;dfhdf g}lts d"No, ;lxi0f'tf, ;dfj]zL b[li6sf]0f / ;dfgtfsf] k|j4{g x'G5 . lzIffn] JolQmnfO{ g}ltstf, lhDd]jf/L / gful/s st{Jok|lt ;r]t u/fpF5 .",
+    "cfhsf] l8lh6n o'udf lzIffn] k|ljlw;Fu xft]dfnf] u/]/ cl3 a9\g' cfjZos 5 . k|ljlwsf] k|efjsf/L k|of]un] lzIffnfO{ ;/n, cfsif{s / k|efjsf/L agfpF5 . cgnfOg lzIff, s[lqd a'l4dQf, l8lh6n sIfsf]7f cflbn] cfw'lgs lzIffdf qmflGt NofPsf 5g\ . t/ k|ljlwsf] c;Lldt k|of]un] cfn:otf, lge{/tf / ;fdflhs PSnf]kgdf klg k'¥ofpg ;S5 .",
+    ";du|df, lzIff Ps cd"No ;DklQ xf] h;n] JolQmnfO{ cfTdlge{/, ;Ifd / hfu?s agfpF5 . lzlIft gful/s /fi6«sf] d]?b08 x'g\ . lzIffaf6 dfq b]z ;d[4, ;'Jojl:yt / ;+:s[t aGg ;S5 . To;}n] xfd|f ;a} gLlt / of]hgfx¿ lzIffsf] k|j4{gdf s]lGb|t x'g'kb{5 ."
+  ],
+  title: "शिक्षा: मानव सभ्यताको मेरुदण्ड"
+};
+
 // 200+ Word Practice Texts - Long form practice texts
 export const longPracticeTexts: TextEntry[] = [
   {
@@ -245,9 +265,5 @@ export const getTextBatch = (count: number): TextEntry[] => {
   return shuffled.slice(0, Math.min(count, textSamples.length));
 };
 
-// Longer educational text for special display
-export const educationText = {
-  title: "शिक्षा: मानव सभ्यताको मेरुदण्ड",
-  unicode: [
-    "शिक्षा मानव सभ्यताको मेरुदण्ड हो। यो समाजको उन्नति, समृद्धि र सांस्कृतिक संरक्षणको लागि महत्त्वपूर्ण तत्व हो। शिक्षाले व्यक्ति मात्र नभई समग्र राष्ट्रलाई मार्गदर्शन गर्छ। कुनै पनि देशको उन्नति शिक्षाको स्तरमा निर्भर गर्दछ। ज्ञानको गहिराइमा पुग्नका लागि शिक्षा अनिवार्य छ।",
-    "शिक्षा व्यक्तिको बौद्धिक क्षमता
+// Export educationText for use in other components
+export { educationText };
