@@ -1,7 +1,7 @@
 
 # 🇳🇵 Nepali Typing Master – Learn Nepali Unicode Typing Online
 
-![Nepali Typing Master](public/og-image.png)
+
 
 > Improve your Nepali Unicode typing speed, accuracy, and keyboard skills with interactive lessons, typing tests, and real-time performance tracking.
 
