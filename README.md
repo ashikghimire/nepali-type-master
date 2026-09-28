@@ -208,13 +208,11 @@ Contributions are welcome.
 ## 👨‍💻 Developer
 
 ### Ashik Ghimire
-Founder & Director — VisionaryTech Pvt. Ltd.
+
 
 🌐 https://ashikghimire.com.np  
 🌐 https://ghimireashik.com.np  
-🌐 https://visionarytech.com.np
 
-### VisionaryTech Pvt. Ltd.
 
 Building innovative digital solutions for Nepal and beyond.
 
@@ -222,7 +220,7 @@ Building innovative digital solutions for Nepal and beyond.
 
 ## 📄 License
 
-Licensed under the MIT License.
+Licensed under the own License.
 
 ---
 
